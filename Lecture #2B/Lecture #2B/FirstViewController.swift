@@ -1,8 +1,8 @@
 //
 //  FirstViewController.swift
-//  Assignment #1
+//  Lecture #2B
 //
-//  Created by David Cohron on 6/20/16.
+//  Created by David Cohron on 6/22/16.
 //  Copyright © 2016 Trident Advisors. All rights reserved.
 //
 
