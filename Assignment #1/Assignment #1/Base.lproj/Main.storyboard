@@ -111,7 +111,7 @@
                                                         </state>
                                                     </button>
                                                 </subviews>
-                                                <color key="backgroundColor" red="0.57647058819999997" green="0.97647058819999999" blue="0.98431372549999996" alpha="1" colorSpace="calibratedRGB"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 <constraints>
                                                     <constraint firstItem="VM6-9M-jkg" firstAttribute="leading" secondItem="yGh-yR-UNr" secondAttribute="trailing" constant="40" id="0bm-UR-2Vh"/>
                                                     <constraint firstItem="VM6-9M-jkg" firstAttribute="top" secondItem="HLo-wM-Iwc" secondAttribute="bottom" constant="8" symbolic="YES" id="1rI-2S-yMa"/>
@@ -195,18 +195,23 @@
                                 </constraints>
                                 <variation key="default">
                                     <mask key="constraints">
+                                        <exclude reference="OWI-Tw-der"/>
+                                        <exclude reference="QZc-E0-kwG"/>
                                         <exclude reference="HeG-Wy-49l"/>
                                         <exclude reference="R0a-mX-MK1"/>
                                         <exclude reference="WC9-Th-oxU"/>
                                         <exclude reference="YKg-2C-WGe"/>
                                         <exclude reference="cwa-1y-irT"/>
                                         <exclude reference="suo-K8-2fV"/>
-                                        <exclude reference="OWI-Tw-der"/>
-                                        <exclude reference="QZc-E0-kwG"/>
                                     </mask>
                                 </variation>
                                 <variation key="heightClass=compact-widthClass=compact">
                                     <mask key="constraints">
+                                        <include reference="OWI-Tw-der"/>
+                                        <include reference="QZc-E0-kwG"/>
+                                        <exclude reference="f7D-9D-QgF"/>
+                                        <exclude reference="qHM-Zn-7EZ"/>
+                                        <exclude reference="wUu-3j-yiJ"/>
                                         <exclude reference="7F8-He-gfW"/>
                                         <exclude reference="HeG-Wy-49l"/>
                                         <exclude reference="LaC-sn-ZU3"/>
@@ -217,11 +222,6 @@
                                         <exclude reference="cTN-ea-tbP"/>
                                         <include reference="cwa-1y-irT"/>
                                         <include reference="suo-K8-2fV"/>
-                                        <include reference="OWI-Tw-der"/>
-                                        <include reference="QZc-E0-kwG"/>
-                                        <exclude reference="f7D-9D-QgF"/>
-                                        <exclude reference="qHM-Zn-7EZ"/>
-                                        <exclude reference="wUu-3j-yiJ"/>
                                     </mask>
                                 </variation>
                             </view>
