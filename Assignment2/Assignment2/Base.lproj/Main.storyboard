@@ -29,10 +29,14 @@
                         <viewControllerLayoutGuide type="top" id="fQ8-fh-2JA"/>
                         <viewControllerLayoutGuide type="bottom" id="oI6-dQ-Cat"/>
                     </layoutGuides>
-                    <view key="view" alpha="0.10000000000000001" contentMode="scaleToFill" id="d07-4C-yAo" userLabel="View">
+                    <view key="view" contentMode="scaleToFill" id="d07-4C-yAo" userLabel="View">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <view alpha="0.10000000000000001" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xTM-jb-MoT" userLabel="OpacityView">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <color key="backgroundColor" red="0.0" green="1" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
+                            </view>
                             <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vYc-dj-dcR" userLabel="EncapsulatingView">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <subviews>
@@ -68,12 +72,16 @@
                                 </constraints>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" red="0.40000000600000002" green="1" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="vYc-dj-dcR" firstAttribute="centerY" secondItem="d07-4C-yAo" secondAttribute="centerY" id="IS5-Bc-qQV"/>
-                            <constraint firstItem="vYc-dj-dcR" firstAttribute="width" secondItem="d07-4C-yAo" secondAttribute="width" id="J2p-nC-XpC"/>
-                            <constraint firstItem="vYc-dj-dcR" firstAttribute="height" secondItem="d07-4C-yAo" secondAttribute="height" id="K6m-4C-n1s"/>
-                            <constraint firstItem="vYc-dj-dcR" firstAttribute="centerX" secondItem="d07-4C-yAo" secondAttribute="centerX" id="hHS-E6-y0T"/>
+                            <constraint firstItem="xTM-jb-MoT" firstAttribute="centerY" secondItem="d07-4C-yAo" secondAttribute="centerY" id="4A0-6p-9Ky"/>
+                            <constraint firstItem="xTM-jb-MoT" firstAttribute="centerX" secondItem="d07-4C-yAo" secondAttribute="centerX" id="ClY-Ca-e3s"/>
+                            <constraint firstItem="vYc-dj-dcR" firstAttribute="height" secondItem="d07-4C-yAo" secondAttribute="height" id="Evr-kp-FIy"/>
+                            <constraint firstItem="vYc-dj-dcR" firstAttribute="centerY" secondItem="d07-4C-yAo" secondAttribute="centerY" id="MYe-Da-nG7"/>
+                            <constraint firstItem="xTM-jb-MoT" firstAttribute="height" secondItem="d07-4C-yAo" secondAttribute="height" id="WbG-5d-Mce"/>
+                            <constraint firstItem="vYc-dj-dcR" firstAttribute="width" secondItem="d07-4C-yAo" secondAttribute="width" id="YCb-pd-QWY"/>
+                            <constraint firstItem="vYc-dj-dcR" firstAttribute="centerX" secondItem="d07-4C-yAo" secondAttribute="centerX" id="hrW-h0-ZWg"/>
+                            <constraint firstItem="xTM-jb-MoT" firstAttribute="width" secondItem="d07-4C-yAo" secondAttribute="width" id="jZW-HH-aAW"/>
                         </constraints>
                     </view>
                     <connections>
@@ -92,10 +100,14 @@
                         <viewControllerLayoutGuide type="top" id="j65-y8-ALb"/>
                         <viewControllerLayoutGuide type="bottom" id="RZA-UU-h1n"/>
                     </layoutGuides>
-                    <view key="view" alpha="0.10000000000000001" contentMode="scaleToFill" id="tX9-Bl-3X5">
+                    <view key="view" contentMode="scaleToFill" id="tX9-Bl-3X5">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <view alpha="0.10000000000000001" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bi3-Bw-7e5" userLabel="OpacityView">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <color key="backgroundColor" red="1" green="0.93972013450000003" blue="0.12702077419999999" alpha="1" colorSpace="calibratedRGB"/>
+                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5kX-VY-ny8" userLabel="EncapsulatingView">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <subviews>
@@ -130,10 +142,14 @@
                                 </constraints>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" red="1" green="0.93972013450000003" blue="0.12702077419999999" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="bi3-Bw-7e5" firstAttribute="centerX" secondItem="tX9-Bl-3X5" secondAttribute="centerX" id="535-6c-kCe"/>
                             <constraint firstItem="5kX-VY-ny8" firstAttribute="centerX" secondItem="tX9-Bl-3X5" secondAttribute="centerX" id="6Dw-56-aOj"/>
+                            <constraint firstItem="bi3-Bw-7e5" firstAttribute="centerY" secondItem="tX9-Bl-3X5" secondAttribute="centerY" id="7ih-Ty-ZXQ"/>
+                            <constraint firstItem="bi3-Bw-7e5" firstAttribute="width" secondItem="tX9-Bl-3X5" secondAttribute="width" id="Eu0-m0-bzi"/>
                             <constraint firstItem="5kX-VY-ny8" firstAttribute="height" secondItem="tX9-Bl-3X5" secondAttribute="height" id="g2U-tv-qzl"/>
+                            <constraint firstItem="bi3-Bw-7e5" firstAttribute="height" secondItem="tX9-Bl-3X5" secondAttribute="height" id="iaO-RL-fXe"/>
                             <constraint firstItem="5kX-VY-ny8" firstAttribute="width" secondItem="tX9-Bl-3X5" secondAttribute="width" id="kVL-3S-Jyf"/>
                             <constraint firstItem="5kX-VY-ny8" firstAttribute="centerY" secondItem="tX9-Bl-3X5" secondAttribute="centerY" id="ns5-ks-zQ1"/>
                         </constraints>
@@ -154,10 +170,14 @@
                         <viewControllerLayoutGuide type="top" id="rQD-r1-bq7"/>
                         <viewControllerLayoutGuide type="bottom" id="yiO-3B-9W5"/>
                     </layoutGuides>
-                    <view key="view" alpha="0.10000000000000001" contentMode="scaleToFill" id="tuG-Qk-RdJ">
+                    <view key="view" contentMode="scaleToFill" id="tuG-Qk-RdJ">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <view alpha="0.10000000000000001" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AZc-3H-ndB" userLabel="OpacityView">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <color key="backgroundColor" red="0.31179718680000001" green="0.89534302629999996" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YDd-EJ-HMw" userLabel="EncapsulatingView">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <subviews>
@@ -192,10 +212,14 @@
                                 </constraints>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" red="0.31179718680000001" green="0.89534302629999996" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="AZc-3H-ndB" firstAttribute="height" secondItem="tuG-Qk-RdJ" secondAttribute="height" id="Ber-b7-E39"/>
+                            <constraint firstItem="AZc-3H-ndB" firstAttribute="centerX" secondItem="tuG-Qk-RdJ" secondAttribute="centerX" id="EqE-bz-Y9w"/>
                             <constraint firstItem="YDd-EJ-HMw" firstAttribute="centerY" secondItem="tuG-Qk-RdJ" secondAttribute="centerY" id="XhT-Op-yG8"/>
                             <constraint firstItem="YDd-EJ-HMw" firstAttribute="height" secondItem="tuG-Qk-RdJ" secondAttribute="height" id="YJU-os-Ctf"/>
+                            <constraint firstItem="AZc-3H-ndB" firstAttribute="centerY" secondItem="tuG-Qk-RdJ" secondAttribute="centerY" id="ZR0-EC-03q"/>
+                            <constraint firstItem="AZc-3H-ndB" firstAttribute="width" secondItem="tuG-Qk-RdJ" secondAttribute="width" id="dsf-3b-2qF"/>
                             <constraint firstItem="YDd-EJ-HMw" firstAttribute="centerX" secondItem="tuG-Qk-RdJ" secondAttribute="centerX" id="ngB-5A-pE1"/>
                             <constraint firstItem="YDd-EJ-HMw" firstAttribute="width" secondItem="tuG-Qk-RdJ" secondAttribute="width" id="niZ-V3-B7q"/>
                         </constraints>
