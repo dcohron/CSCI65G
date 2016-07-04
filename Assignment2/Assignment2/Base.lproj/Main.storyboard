@@ -33,7 +33,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vYc-dj-dcR" userLabel="EncapsulatingView">
+                            <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vYc-dj-dcR" userLabel="EncapsulatingView">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8jR-YX-mn0">
@@ -43,10 +43,6 @@
                                             <constraint firstAttribute="height" constant="30" id="kOg-XN-ZKq"/>
                                         </constraints>
                                         <state key="normal" title="Run"/>
-                                        <connections>
-                                            <action selector="RunProblem2:" destination="d07-4C-yAo" eventType="touchUpInside" id="EiL-5s-hL2"/>
-                                            <action selector="runProblem2:" destination="d07-4C-yAo" eventType="touchUpInside" id="b3d-bM-fHK"/>
-                                        </connections>
                                     </button>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Output" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="wLo-om-ye6">
                                         <rect key="frame" x="180" y="236" width="240" height="128"/>
@@ -75,10 +71,6 @@
                             <constraint firstItem="vYc-dj-dcR" firstAttribute="height" secondItem="d07-4C-yAo" secondAttribute="height" id="K6m-4C-n1s"/>
                             <constraint firstItem="vYc-dj-dcR" firstAttribute="centerX" secondItem="d07-4C-yAo" secondAttribute="centerX" id="hHS-E6-y0T"/>
                         </constraints>
-                        <connections>
-                            <outlet property="OutputProblem2" destination="wLo-om-ye6" id="eIh-Ah-I4k"/>
-                            <outlet property="outputProblem2" destination="wLo-om-ye6" id="QQe-33-zoW"/>
-                        </connections>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Seq-z2-1D4" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -88,7 +80,7 @@
         <!--Problem3 View Controller-->
         <scene sceneID="lL3-h9-yjJ">
             <objects>
-                <viewController id="jaG-9T-io5" customClass="Problem3ViewController" customModule="Assignment2" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="jaG-9T-io5" userLabel="Problem3 View Controller" customClass="Problem3ViewController" customModule="Assignment2" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="j65-y8-ALb"/>
                         <viewControllerLayoutGuide type="bottom" id="RZA-UU-h1n"/>
@@ -107,9 +99,6 @@
                                             <constraint firstAttribute="height" constant="30" id="eaV-VK-QkT"/>
                                         </constraints>
                                         <state key="normal" title="Run"/>
-                                        <connections>
-                                            <action selector="RunProblem3:" destination="jaG-9T-io5" eventType="touchUpInside" id="3ON-7X-BfC"/>
-                                        </connections>
                                     </button>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Output" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="ylm-Rm-hXG">
                                         <rect key="frame" x="180" y="236" width="240" height="128"/>
@@ -139,9 +128,6 @@
                             <constraint firstItem="5kX-VY-ny8" firstAttribute="centerY" secondItem="tX9-Bl-3X5" secondAttribute="centerY" id="ns5-ks-zQ1"/>
                         </constraints>
                     </view>
-                    <connections>
-                        <outlet property="OutputProblem3" destination="ylm-Rm-hXG" id="32K-Qb-Piy"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Xd0-4L-eoS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -150,7 +136,7 @@
         <!--Problem4 View Controller-->
         <scene sceneID="v95-Xo-req">
             <objects>
-                <viewController id="81k-5F-tXl" customClass="Problem4ViewController" customModule="Assignment2" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="81k-5F-tXl" userLabel="Problem4 View Controller" customClass="Problem4ViewController" customModule="Assignment2" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="rQD-r1-bq7"/>
                         <viewControllerLayoutGuide type="bottom" id="yiO-3B-9W5"/>
@@ -169,9 +155,6 @@
                                             <constraint firstAttribute="width" constant="46" id="Oey-0D-kVc"/>
                                         </constraints>
                                         <state key="normal" title="Run"/>
-                                        <connections>
-                                            <action selector="RunProblem4:" destination="81k-5F-tXl" eventType="touchUpInside" id="6A7-0e-Ord"/>
-                                        </connections>
                                     </button>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Output" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="S3o-3O-gAA" userLabel="Output Problem4">
                                         <rect key="frame" x="180" y="236" width="240" height="128"/>
@@ -201,9 +184,6 @@
                             <constraint firstItem="YDd-EJ-HMw" firstAttribute="width" secondItem="tuG-Qk-RdJ" secondAttribute="width" id="niZ-V3-B7q"/>
                         </constraints>
                     </view>
-                    <connections>
-                        <outlet property="OutputPoblem4" destination="S3o-3O-gAA" id="C91-ZJ-xql"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gVd-sJ-Aqj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -234,7 +214,7 @@
                                             <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                                         </state>
                                         <connections>
-                                            <segue destination="odp-jD-yd3" kind="show" id="msd-mh-qdR"/>
+                                            <segue destination="odp-jD-yd3" kind="show" id="Tf3-rv-9CJ"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g6A-Dj-rbZ">
@@ -247,7 +227,7 @@
                                             <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                                         </state>
                                         <connections>
-                                            <segue destination="jaG-9T-io5" kind="show" id="cPQ-ol-nAX"/>
+                                            <segue destination="jaG-9T-io5" kind="show" id="hGG-49-UZd"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vGI-nR-kck">
@@ -260,7 +240,7 @@
                                             <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                                         </state>
                                         <connections>
-                                            <segue destination="81k-5F-tXl" kind="show" id="fl2-Qo-lGJ"/>
+                                            <segue destination="81k-5F-tXl" kind="show" id="km2-R8-ahz"/>
                                         </connections>
                                     </button>
                                 </subviews>

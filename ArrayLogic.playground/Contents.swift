@@ -105,6 +105,66 @@ count
 
 
 
+
+//var currentCell = before[row][column]
+
+var currentCell = false
+
+switch currentCell {
+case true:
+    print("true")
+case false:
+    print("false")
+}
+
+
+count
+
+switch count {
+case 0..<2:
+    after[row][column] = false
+case 2:
+    switch currentCell {
+    case true:
+        after[row][column] = true
+    case false:
+        after[row][column] = false
+    }
+case 3:
+    after[row][column] = true
+default:
+    after[row][column] = false
+}
+
+count
+currentCell
+after[row][column]
+
+
+//if count == 2,3 {
+//    print("Count is \(count)")
+//}
+
+//switch currentCell {
+//case true:
+//    if count in 2...3 {
+//        after[row][column] = true
+//    }
+//    else {
+//        after[row][column] = false
+//    }
+//case false:
+//    if neigborCount(row, column:column) == 3 {
+//        after[row][column] = true
+//    }
+//    else {
+//        after[row][column] = false
+//    }
+//}
+
+after[row][column]
+
+
 //func neighborCount(inputArray:[[Bool]], row:Int, column:Int) -> Int {
 //    var aliveCount = 0
 //    if inputArray[row+1][column-1] { aliveCount +=1 }

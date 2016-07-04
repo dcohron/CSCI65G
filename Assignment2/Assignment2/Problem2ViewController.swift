@@ -25,14 +25,7 @@ class Problem2ViewController: UIViewController {
     }
     
     
-    @IBAction func runProblem2(sender: AnyObject) {
-        
-    }
-    
-    
-    @IBOutlet weak var outputProblem2: UITextView!
-    
-
+       
     /*
     // MARK: - Navigation
 
