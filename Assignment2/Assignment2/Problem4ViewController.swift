@@ -26,6 +26,14 @@ class Problem4ViewController: UIViewController {
     
     
     
+    @IBAction func runProblem4(sender: AnyObject) {
+        outputProblem4.text = "Hello number 4"
+    }
+    
+    
+    @IBOutlet weak var outputProblem4: UITextView!
+    
+    
     /*
     // MARK: - Navigation
 

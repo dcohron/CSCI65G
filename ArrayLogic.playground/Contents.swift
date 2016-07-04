@@ -10,6 +10,12 @@ past[1][3] = 250
 past
 
 
+var hour = -3+12
+
+var tweleveHour = 0
+
+tweleveHour = hour%12
+
 
 
 
@@ -104,6 +110,21 @@ if before[(row-1)%10][(column+1)%10] {count += 1}
 count
 
 
+// count number of live neighbors when passed array, cell row and cell column.
+func neighborCount ( inputArray:[[Bool]], row:Int, column:Int) -> Int {
+    count = 0
+    if before[(row+1)%10][(column-1)%10] {count += 1}
+    if before[(row+1)%10][(column)%10] {count += 1}
+    if before[(row+1)%10][(column+1)%10] {count += 1}
+    if before[(row)%10][(column-1)%10] {count += 1}
+    if before[(row)%10][(column+1)%10] {count += 1}
+    if before[(row-1)%10][(column-1)%10] {count += 1}
+    if before[(row-1)%10][(column)%10] {count += 1}
+    if before[(row-1)%10][(column+1)%10] {count += 1}
+    return count
+}
+
+neighborCount(before, row: row, column: column)
 
 
 //var currentCell = before[row][column]
@@ -139,6 +160,56 @@ default:
 count
 currentCell
 after[row][column]
+
+var neighborsAlive = 0
+
+
+for row in 0...9 {
+    for column in 0...9 {
+        row
+        column
+        
+        func hoodCount ( inputArray:[[Bool]], row:Int, column:Int) -> Int {
+            count = 0
+            if before[(row+1)%10][(column+9)%10] {count += 1}
+            if before[(row+1)%10][(column)%10] {count += 1}
+            if before[(row+1)%10][(column+1)%10] {count += 1}
+            if before[(row)%10][(column+9)%10] {count += 1}
+            if before[(row)%10][(column+1)%10] {count += 1}
+            if before[(row+9)%10][(column+9)%10] {count += 1}
+            if before[(row+9)%10][(column)%10] {count += 1}
+            if before[(row+9)%10][(column+1)%10] {count += 1}
+            return count
+        }
+        
+        
+        neighborsAlive = hoodCount(before, row:row, column:column)
+        
+        switch neighborsAlive {
+        case 0..<2:
+            after[row][column] = false
+        case 2:
+            switch currentCell {
+            case true:
+                after[row][column] = true
+            case false:
+                after[row][column] = false
+            }
+        case 3:
+            after[row][column] = true
+        default:
+            after[row][column] = false
+        }
+
+    
+    }
+}
+
+
+
+
+
+
 
 
 //if count == 2,3 {

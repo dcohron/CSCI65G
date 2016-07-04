@@ -24,7 +24,6 @@
         <!--Problem2 View Controller-->
         <scene sceneID="2Ma-WL-Wo2">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Seq-z2-1D4" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="odp-jD-yd3" userLabel="Problem2 View Controller" customClass="Problem2ViewController" customModule="Assignment2" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="fQ8-fh-2JA"/>
@@ -46,7 +45,7 @@
                                         <state key="normal" title="Run"/>
                                         <connections>
                                             <action selector="runProblem2:" destination="d07-4C-yAo" eventType="touchUpInside" id="Pm3-TU-LYP"/>
-                                            <action selector="runProblem2:" destination="odp-jD-yd3" eventType="touchUpInside" id="zhX-Q4-tev"/>
+                                            <action selector="runProblem2:" destination="odp-jD-yd3" eventType="touchUpInside" id="vbc-EL-olE"/>
                                         </connections>
                                     </button>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Output" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="wLo-om-ye6">
@@ -78,9 +77,10 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="outputProblem2" destination="wLo-om-ye6" id="76y-9l-QxB"/>
+                        <outlet property="outputProblem2" destination="wLo-om-ye6" id="i7c-96-f9h"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Seq-z2-1D4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1090" y="-343"/>
         </scene>
@@ -168,6 +168,9 @@
                                             <constraint firstAttribute="width" constant="46" id="Oey-0D-kVc"/>
                                         </constraints>
                                         <state key="normal" title="Run"/>
+                                        <connections>
+                                            <action selector="runProblem4:" destination="81k-5F-tXl" eventType="touchUpInside" id="xGd-ct-eD9"/>
+                                        </connections>
                                     </button>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Output" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="S3o-3O-gAA" userLabel="Output Problem4">
                                         <rect key="frame" x="180" y="236" width="240" height="128"/>
@@ -197,6 +200,9 @@
                             <constraint firstItem="YDd-EJ-HMw" firstAttribute="width" secondItem="tuG-Qk-RdJ" secondAttribute="width" id="niZ-V3-B7q"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="outputProblem4" destination="S3o-3O-gAA" id="qiT-4j-W81"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gVd-sJ-Aqj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
