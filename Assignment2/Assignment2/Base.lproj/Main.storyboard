@@ -21,10 +21,10 @@
             </objects>
             <point key="canvasLocation" x="-675" y="337"/>
         </scene>
-        <!--View Controller-->
+        <!--Problem2B View Controller-->
         <scene sceneID="7rj-aQ-JXc">
             <objects>
-                <viewController id="5Ba-J1-aSl" sceneMemberID="viewController">
+                <viewController id="5Ba-J1-aSl" customClass="Problem2BViewController" customModule="Assignment2" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="YiV-lk-yip"/>
                         <viewControllerLayoutGuide type="bottom" id="TaK-l5-Dnk"/>
@@ -47,6 +47,9 @@
                                             <constraint firstAttribute="width" constant="46" id="whV-lY-X6n"/>
                                         </constraints>
                                         <state key="normal" title="Run"/>
+                                        <connections>
+                                            <action selector="runProblem2:" destination="5Ba-J1-aSl" eventType="touchUpInside" id="mn3-08-xsR"/>
+                                        </connections>
                                     </button>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Press &quot;Run&quot; to start game." textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Y95-nn-7Pd" userLabel="Output Problem">
                                         <rect key="frame" x="180" y="236" width="240" height="128"/>
@@ -80,6 +83,9 @@
                             <constraint firstItem="FTD-EX-Qrg" firstAttribute="height" secondItem="wTm-he-QDT" secondAttribute="height" id="wW8-Iy-PlU"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="outputProblem2" destination="Y95-nn-7Pd" id="RT2-uO-np9"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hh3-X7-26K" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

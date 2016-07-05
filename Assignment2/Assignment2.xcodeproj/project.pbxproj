@@ -16,6 +16,7 @@
 		0187D9521D29A9FB005EDB25 /* Problem3ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0187D9511D29A9FB005EDB25 /* Problem3ViewController.swift */; };
 		0187D9541D29AA10005EDB25 /* Problem4ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0187D9531D29AA10005EDB25 /* Problem4ViewController.swift */; };
 		0187D9561D2B1991005EDB25 /* Engine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0187D9551D2B1991005EDB25 /* Engine.swift */; };
+		01D4F8081D2C122D00CE19D2 /* Problem2BViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D4F8071D2C122D00CE19D2 /* Problem2BViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		0187D9511D29A9FB005EDB25 /* Problem3ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Problem3ViewController.swift; sourceTree = "<group>"; };
 		0187D9531D29AA10005EDB25 /* Problem4ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Problem4ViewController.swift; sourceTree = "<group>"; };
 		0187D9551D2B1991005EDB25 /* Engine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Engine.swift; sourceTree = "<group>"; };
+		01D4F8071D2C122D00CE19D2 /* Problem2BViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Problem2BViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,7 +66,7 @@
 			children = (
 				012075BF1D247E0100F5B5E4 /* AppDelegate.swift */,
 				012075C11D247E0100F5B5E4 /* MainViewController.swift */,
-				0187D94F1D29A9D0005EDB25 /* Problem2ViewController.swift */,
+				01D4F8071D2C122D00CE19D2 /* Problem2BViewController.swift */,
 				0187D9511D29A9FB005EDB25 /* Problem3ViewController.swift */,
 				0187D9531D29AA10005EDB25 /* Problem4ViewController.swift */,
 				012075C31D247E0100F5B5E4 /* Main.storyboard */,
@@ -72,6 +74,7 @@
 				012075C61D247E0100F5B5E4 /* Assets.xcassets */,
 				012075C81D247E0100F5B5E4 /* LaunchScreen.storyboard */,
 				012075CB1D247E0100F5B5E4 /* Info.plist */,
+				0187D94F1D29A9D0005EDB25 /* Problem2ViewController.swift */,
 			);
 			path = Assignment2;
 			sourceTree = "<group>";
@@ -149,6 +152,7 @@
 			files = (
 				0187D9501D29A9D0005EDB25 /* Problem2ViewController.swift in Sources */,
 				0187D9561D2B1991005EDB25 /* Engine.swift in Sources */,
+				01D4F8081D2C122D00CE19D2 /* Problem2BViewController.swift in Sources */,
 				012075C21D247E0100F5B5E4 /* MainViewController.swift in Sources */,
 				0187D9541D29AA10005EDB25 /* Problem4ViewController.swift in Sources */,
 				0187D9521D29A9FB005EDB25 /* Problem3ViewController.swift in Sources */,
