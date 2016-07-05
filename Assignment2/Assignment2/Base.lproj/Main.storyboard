@@ -48,14 +48,13 @@
                                         </constraints>
                                         <state key="normal" title="Run"/>
                                     </button>
-                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Y95-nn-7Pd">
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Press &quot;Run&quot; to start game." textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Y95-nn-7Pd" userLabel="Output Problem">
                                         <rect key="frame" x="180" y="236" width="240" height="128"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="240" id="gif-nO-jFp"/>
                                             <constraint firstAttribute="height" constant="128" id="wVA-ZQ-7yn"/>
                                         </constraints>
-                                        <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                     </textView>
@@ -180,7 +179,7 @@
                                             <action selector="runProblem3:" destination="jaG-9T-io5" eventType="touchUpInside" id="bXj-LF-whV"/>
                                         </connections>
                                     </button>
-                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Output" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="ylm-Rm-hXG">
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Press &quot;Run&quot; to start game." textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="ylm-Rm-hXG">
                                         <rect key="frame" x="180" y="236" width="240" height="128"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
@@ -250,7 +249,7 @@
                                             <action selector="runProblem4:" destination="81k-5F-tXl" eventType="touchUpInside" id="xGd-ct-eD9"/>
                                         </connections>
                                     </button>
-                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Output" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="S3o-3O-gAA" userLabel="Output Problem4">
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Press &quot;Run&quot; to start game." textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="S3o-3O-gAA" userLabel="Output Problem4">
                                         <rect key="frame" x="180" y="236" width="240" height="128"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>

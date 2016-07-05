@@ -250,6 +250,25 @@ print(neighborhoodArray)
 
 
 
+func livingNeighborsCount (neighborHood:[(Int, Int)], inputArray:[[Bool]]) -> Int {
+    
+    var count = 0
+    var row = 0
+    var column = 0
+    
+    for item in neighborHood {
+        row = item.0
+        column = item.1
+        if inputArray[row][column] {count += 1}
+    }
+    return count
+}
+
+var lifeCount = 0
+lifeCount = livingNeighborsCount (neighborhoodArray, inputArray: before)
+print(lifeCount)
+
+
 //if count == 2,3 {
 //    print("Count is \(count)")
 //}

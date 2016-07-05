@@ -64,7 +64,7 @@ class Problem3ViewController: UIViewController {
 
         
         count = totalCount(before)
-        toPrint = "Alive before = \(count)"
+        toPrint = "Alive before = \(count)."
         outputProblem3.text = toPrint
        
         
@@ -72,7 +72,7 @@ class Problem3ViewController: UIViewController {
         after = step(before)
         
         count = totalCount(after)
-        toPrint += " and the new generation has \(count) lives."
+        toPrint += "\rAlive after = \(count)."
         outputProblem3.text = toPrint
     }
     
