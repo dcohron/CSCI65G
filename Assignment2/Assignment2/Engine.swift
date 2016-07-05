@@ -64,22 +64,28 @@ func step (inputArray:[[Bool]]) -> [[Bool]] {
 
 
 
-//func neighbors ( (row:Int, column:Int)) -> [(Int,Int)]     {
-//    var count = 0
-//    if inputArray[(row+1)%10][(column+9)%10] {count += 1}
-//    if inputArray[(row+1)%10][(column)%10] {count += 1}
-//    if inputArray[(row+1)%10][(column+1)%10] {count += 1}
-//    if inputArray[(row)%10][(column+9)%10] {count += 1}
-//    if inputArray[(row)%10][(column+1)%10] {count += 1}
-//    if inputArray[(row+9)%10][(column+9)%10] {count += 1}
-//    if inputArray[(row+9)%10][(column)%10] {count += 1}
-//    if inputArray[(row+9)%10][(column+1)%10] {count += 1}
-//    return count
-//}
+// function that takes and tuple (row, column) and returns an array of tuples for location of all neighbors.
+
+func neighbors (inputTuple: (Int, Int)) -> [(Int, Int)] {
+    var neighborArray = [(Int, Int)] ()
+    var row = inputTuple.0
+    var column = inputTuple.1
+    
+    neighborArray = [((row + 1)%10, (column + 9)%10)]
+    neighborArray.append((((row + 1)%10), column))
+    neighborArray.append((((row + 1)%10), ((column + 1)%10)))
+    neighborArray.append((row, ((column + 9)%10)))
+    neighborArray.append((row, ((column + 1)%10)))
+    neighborArray.append((((row - 1)%10), ((column + 9)%10)))
+    neighborArray.append((((row - 1)%10), column))
+    neighborArray.append((((row - 1)%10), ((column + 1)%10)))
+    
+    return neighborArray
+}
 
 
 
-
+// Repeat of problem 3 which invokes function neighbors instead of directly embedding that functionality
 
 //func step2 (inputArray:[[Bool]]) -> [[Bool]] {
 //    

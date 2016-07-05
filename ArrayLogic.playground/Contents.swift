@@ -206,12 +206,47 @@ for row in 0...9 {
 }
 
 
+// Lets work with tuples
+var a = 2
+var b = 3
+var funTuple = (a, b)
+var tupleArray = [(Int, Int)] ()
+
+tupleArray.append(funTuple)
+tupleArray.append(funTuple)
+tupleArray.append((b, a))
+print (tupleArray)
+
+
+
+
+
 //  Now need neighbors function that takes and tuple (row, column) and returns an array of tuples for location of all neighbors.
 
+func neighbors (inputTuple: (Int, Int)) -> [(Int, Int)] {
+    var neighborArray = [(Int, Int)] ()
+    var row = inputTuple.0
+    var column = inputTuple.1
+    
+    neighborArray = [((row + 1)%10, (column + 9)%10)]
+    neighborArray.append((((row + 1)%10), column))
+    neighborArray.append((((row + 1)%10), ((column + 1)%10)))
+    neighborArray.append((row, ((column + 9)%10)))
+    neighborArray.append((row, ((column + 1)%10)))
+    neighborArray.append((((row - 1)%10), ((column + 9)%10)))
+    neighborArray.append((((row - 1)%10), column))
+    neighborArray.append((((row - 1)%10), ((column + 1)%10)))
+    
+    return neighborArray
+}
 
+var xdata = 9
+var ydata = 9
+var tuple = (xdata, ydata)
+var neighborhoodArray = [(Int, Int)] ()
 
-
-
+neighborhoodArray = neighbors(tuple)
+print(neighborhoodArray)
 
 
 
