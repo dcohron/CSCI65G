@@ -25,7 +25,11 @@ class Problem3ViewController: UIViewController {
     }
     
     
+    // Action upon pressing the Run button
+    
     @IBAction func runProblem3(sender: AnyObject) {
+        
+        // Initialize function variables
         
         var count = 0
         var toPrint = ""
@@ -62,14 +66,18 @@ class Problem3ViewController: UIViewController {
             }
         }
 
+        // Count the initial lives based upon the random seeding and show in Text View
         
         count = totalCount(before)
         toPrint = "Alive before = \(count)."
         outputProblem3.text = toPrint
        
         
-        // Pass before to step() in Engine.swift to get next generation returned as an array
+        // Pass array before to step() in Engine.swift to get next generation returned as an array
+        
         after = step(before)
+        
+        // Count the next generation lives based upon the above and show in Text View
         
         count = totalCount(after)
         toPrint += "\rAlive after = \(count)."

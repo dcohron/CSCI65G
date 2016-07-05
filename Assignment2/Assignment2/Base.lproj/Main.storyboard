@@ -21,10 +21,10 @@
             </objects>
             <point key="canvasLocation" x="-675" y="337"/>
         </scene>
-        <!--Problem2B View Controller-->
+        <!--Problem2 View Controller-->
         <scene sceneID="7rj-aQ-JXc">
             <objects>
-                <viewController id="5Ba-J1-aSl" customClass="Problem2BViewController" customModule="Assignment2" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="5Ba-J1-aSl" customClass="Problem2ViewController" customModule="Assignment2" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="YiV-lk-yip"/>
                         <viewControllerLayoutGuide type="bottom" id="TaK-l5-Dnk"/>
@@ -89,7 +89,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hh3-X7-26K" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1093" y="-993"/>
+            <point key="canvasLocation" x="1090" y="-347"/>
         </scene>
         <!--Problem3 View Controller-->
         <scene sceneID="lL3-h9-yjJ">
@@ -231,10 +231,10 @@
             </objects>
             <point key="canvasLocation" x="1090" y="1025"/>
         </scene>
-        <!--Main View Controller-->
+        <!--Main Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="MainViewController" customModule="Assignment2" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="MainController" customModule="Assignment2" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>

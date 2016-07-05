@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  Main Controller.swift
 //  Assignment2
 //
 //  Created by David Cohron on 6/29/16.
@@ -8,11 +8,14 @@
 
 import UIKit
 
-class MainViewController: UIViewController {
+class MainController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        
+        // set title for navigation bar
+        self.navigationItem.title = "Life";
     }
 
     override func didReceiveMemoryWarning() {

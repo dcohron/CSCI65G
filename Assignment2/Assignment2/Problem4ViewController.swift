@@ -25,13 +25,17 @@ class Problem4ViewController: UIViewController {
     }
     
     
+    // Action upon pressing the Run button
     
     @IBAction func runProblem4(sender: AnyObject) {
+        
+        // Initialize function variables
         
         var count = 0
         var toPrint = ""
         
         //  Function to count lives in total array
+        
         func totalCount(inputArray:[[Bool]]) -> Int {
             var lifeCount = 0
             for row in 0...9 {
@@ -45,7 +49,7 @@ class Problem4ViewController: UIViewController {
         }
         
         
-        // Main body of runProblem3
+        // Main body of runProblem4
         
         // instantiate array of boolean arrays for before and after
         var before = Array(count: 10, repeatedValue: Array(count: 10, repeatedValue: false))
@@ -63,14 +67,18 @@ class Problem4ViewController: UIViewController {
             }
         }
         
+        // Count the initial lives based upon the random seeding and show in Text View
         
         count = totalCount(before)
         toPrint = "Alive before = \(count)."
         outputProblem4.text = toPrint
         
         
-        // Pass before to step2() in Engine.swift to get next generation returned as an array
+        // Pass array before to step2() in Engine.swift to get next generation returned as an array
+        
         after = step2(before)
+        
+        // Count the next generation lives based upon the above and show in Text View
         
         count = totalCount(after)
         toPrint += "\rAlive after = \(count)."

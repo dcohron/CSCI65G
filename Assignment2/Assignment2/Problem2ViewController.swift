@@ -1,5 +1,5 @@
 //
-//  Problem2BViewController.swift
+//  Problem2ViewController.swift
 //  Assignment2
 //
 //  Created by David Cohron on 7/5/16.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class Problem2BViewController: UIViewController {
+class Problem2ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,8 +26,11 @@ class Problem2BViewController: UIViewController {
     
     
     
+    // Action upon pressing the Run button
     
     @IBAction func runProblem2(sender: AnyObject) {
+        
+        // Initialize function variables
         
         var toPrint = ""
         var count = 0
@@ -48,7 +51,7 @@ class Problem2BViewController: UIViewController {
         }
         
         
-        // instantiate array of boolean arrays for both before and after
+        // instantiate array of boolean arrays named before and after
         var before = Array(count: 10, repeatedValue: Array(count: 10, repeatedValue: false))
         var after = Array(count: 10, repeatedValue: Array(count: 10, repeatedValue: false))
         
@@ -65,6 +68,7 @@ class Problem2BViewController: UIViewController {
             }
         }
         
+        // Count the initial lives based upon the random seeding and show in Text View
         
         count = totalCount(before)
         toPrint = "Alive before = \(count)."
@@ -72,9 +76,12 @@ class Problem2BViewController: UIViewController {
         outputProblem2.text = toPrint
         
         
+        // For each cell in array before, check number of neighbors that are alive and set state of array after
+        
         for row in 0...9 {
             for column in 0...9 {
                 
+                // Function to count living cells in neigbors when passed array and subject cell row and column
                 
                 func hoodCount ( inputArray:[[Bool]], row:Int, column:Int) -> Int {
                     count = 0
@@ -90,9 +97,13 @@ class Problem2BViewController: UIViewController {
                 }
                 
                 
+                // Function call to get number of living neighbors
+                
                 neighborsAlive = hoodCount(before, row:row, column:column)
                 
                 currentCell = before[row][column]
+                
+                // Set array after for one cell based on game logic switch on number of living neighbors
                 
                 switch neighborsAlive {
                 case 0..<2:
@@ -113,6 +124,8 @@ class Problem2BViewController: UIViewController {
                 
             }
         }
+        
+        // Count the next generation lives based upon the above and show in Text View
         
         count = totalCount(after)
         toPrint += "\rAlive after = \(count)."
