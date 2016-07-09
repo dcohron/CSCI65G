@@ -19,48 +19,6 @@ class ViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
-    
-    // Problem #1
-    
-    enum CellState: String {
-        case Living = "Living"
-        case Empty = "Empty"
-        case Born = "Born"
-        case Died = "Died"
-        
-        func betterDescription() -> String {
-            return self.rawValue
-        }
-        
-        func description() -> String {
-            switch self {
-            case Living:
-                return self.rawValue
-            case Empty:
-                return self.rawValue
-            case Born:
-                return self.rawValue
-            case Died:
-                return self.rawValue
-            }
-        }
-        
-        func allValues() -> [CellState] {
-            return [.Living, .Empty, .Born, .Died]
-        }
-        
-        func toggle(value: CellState) -> CellState {
-            switch value {
-            case .Empty, .Died:
-                return .Living
-            case .Living, .Born:
-                return .Empty
-            }
-        }
-        
-    }
-    
     
 
 }
