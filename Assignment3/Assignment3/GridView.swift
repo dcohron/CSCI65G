@@ -23,10 +23,11 @@ class GridView: UIView {
             self.grid = Array(count: row, repeatedValue: Array(count: column, repeatedValue: .Empty))
         }
     }
-    @IBInspectable var livingColor: UIColor = UIColor.yellowColor()
+    @IBInspectable var livingColor: UIColor = UIColor.cyanColor()
     @IBInspectable var emptyColor: UIColor = UIColor.whiteColor()
     @IBInspectable var bornColor: UIColor = UIColor.greenColor()
     @IBInspectable var diedColor: UIColor = UIColor.purpleColor()
+    @IBInspectable var gridColor: UIColor = UIColor.yellowColor()
     @IBInspectable var gridWidth: CGFloat = 200.0
     
     var grid: [[CellState]] = [[]]
