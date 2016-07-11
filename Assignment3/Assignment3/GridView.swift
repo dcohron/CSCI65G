@@ -48,11 +48,12 @@ class GridView: UIView {
 //    grid = Array(count: row, repeatedValue: Array(count: column, repeatedValue: .Empty))
 //    grid = initializeGrid(row, ydimension: column)
     
-    
-    // Grid initializer
+
+// None of these initializers are working
+//     Grid initializer
     func initializeGrid (xdimension: Int, ydimension: Int) -> [[CellState]] {
         var newGrid:[[CellState]] = [[]]
-//        newGrid = Array(count: xdimension, repeatedValue: Array(count: ydimension, repeatedValue: .Empty))
+        newGrid = Array(count: xdimension, repeatedValue: Array(count: ydimension, repeatedValue: .Empty))
         return newGrid
     }
 
@@ -84,26 +85,13 @@ class GridView: UIView {
         let background: UIColor = UIColor.whiteColor()
         background.setFill()
         
-//        //set the fill color for the new context
-//        let targetCellState = grid[0][0]
-//        switch targetCellState {
-//        case .Empty:
-//            emptyColor.setFill()
-//        case .Living:
-//            livingColor.setFill()
-//        case .Born:
-//            bornColor.setFill()
-//        case .Died:
-//            diedColor.setFill()
-//        }
 
         CGContextFillRect(drawingContext, CGRectMake(0, 0, drawSize.width, drawSize.height))
         
+        var cellRect:CGRect = CGRectMake(0, 0, drawSize.width, drawSize.height)
         
-        // Something wrong here if set to 1 row and 1 column it draws one big correct image
-        // Other sizes chop the circle in parts
         //set shape and fill in shape
-        let path = UIBezierPath(ovalInRect: rect)
+        let path = UIBezierPath(ovalInRect: cellRect)
         emptyColor.setFill()
         path.fill()
         
@@ -150,6 +138,79 @@ class GridView: UIView {
         
         let image = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
+        
+
+//  This code is not working
+//  Loops to draw individual cells in color corresponding to the CellState
+        
+//        for x in xdimension {
+//            for y in ydimension {
+//                //set rect for next cell
+//                cellRect:CGRect = CGRectMake((drawSize.width * x), (drawSize.height + y), drawSize.width, drawSize.height)
+//                
+//                //set the fill color for the new cell
+//                let targetCellState = grid[0][0]
+//                switch targetCellState {
+//                case .Empty:
+//                    emptyColor.setFill()
+//                case .Living:
+//                    livingColor.setFill()
+//                case .Born:
+//                    bornColor.setFill()
+//                case .Died:
+//                    diedColor.setFill()
+//                }
+//                
+//                let path = UIBezierPath(ovalInRect: cellRect)
+//                emptyColor.setFill()
+//                path.fill()
+//                
+//                // Grid lines = outline box
+//                //create the path
+//                let outlinePath = UIBezierPath()
+//                
+//                //set the path's line width to the height of the stroke
+//                outlinePath.lineWidth = gridWidth
+//                
+//                //move the initial point of the path
+//                //top left corner
+//                //to the start of the outline stroke
+//                outlinePath.moveToPoint(CGPoint(
+//                    x:0,
+//                    y:0))
+//                
+//                //add a point to the path at the end of the stroke
+//                outlinePath.addLineToPoint(CGPoint(
+//                    x:bounds.width,
+//                    y:0))
+//                
+//                //add a point to the path at the end of the stroke
+//                outlinePath.addLineToPoint(CGPoint(
+//                    x:bounds.width,
+//                    y:bounds.height))
+//                
+//                //add a point to the path at the end of the stroke
+//                outlinePath.addLineToPoint(CGPoint(
+//                    x:0,
+//                    y:bounds.height))
+//                
+//                //and back to the original point to close the outline box
+//                outlinePath.addLineToPoint(CGPoint(
+//                    x:0,
+//                    y:0))
+//                
+//                
+//                //set the stroke color
+//                gridColor.setStroke()
+//                
+//                //draw the stroke
+//                outlinePath.stroke()
+//
+//            }
+//
+//        }
+        
+        //  This is not proper but wanted to get something on the screen
         
         UIColor(patternImage: image).setFill()
         CGContextFillRect(context, rect)
