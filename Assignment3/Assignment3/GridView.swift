@@ -17,7 +17,6 @@ class GridView: UIView {
 
     // Set variables for the class
     
-    
     // Start with inspectables
     // Start inspectables with row and column which are changeable by Interface Builder,
     //    but if changed will cause the array to be reinitialized to empty
@@ -40,9 +39,18 @@ class GridView: UIView {
     var cellDim: CGFloat {return CGFloat(240/row)}
     
     
-    var grid: [[CellState]] = [[]]
-    // Initialize the grid upon instantiation of a variable of class GridView
-//    grid = initializeGrid(xdimension: self.row, ydimension: self.column)
+    var grid: [[CellState]] = initializeGrid (row, ydimension: column)
+    var nextGrid: [[CellState]] = initializeGrid (row, ydimension: column)
+    var changeGrid: [(Int,Int)] = [(0,0)]
+    
+    // Grid initializer
+    func initializeGrid (xdimension: Int, ydimension: Int) -> [[CellState]] {
+        var newGrid:[[CellState]] = [[]]
+//        newGrid = Array(count: xdimension, repeatedValue: Array(count: ydimension, repeatedValue: .Empty))
+        return newGrid
+    }
+
+    
     
     
     // Problem 4
@@ -53,9 +61,9 @@ class GridView: UIView {
         //
         let context = UIGraphicsGetCurrentContext()
         
-//        //
-//        CGContextSetFillColorWithColor(context, darkColor.CGColor)
-//        
+//       //
+//       CGContextSetFillColorWithColor(context, UIColor.whiteColor().CGColor)
+//
 //        //
 //        CGContextFillRect(context, rect)
 //        
@@ -67,24 +75,27 @@ class GridView: UIView {
         
         UIGraphicsBeginImageContextWithOptions(drawSize, true, 0.0)
         let drawingContext = UIGraphicsGetCurrentContext()
+        let background: UIColor = UIColor.whiteColor()
+        background.setFill()
         
-        //set the fill color for the new context
-        let targetCellState = grid[0][0]
-        switch targetCellState {
-        case .Empty:
-            emptyColor.setFill()
-        case .Living:
-            livingColor.setFill()
-        case .Born:
-            bornColor.setFill()
-        case .Died:
-            diedColor.setFill()
-        }
+//        //set the fill color for the new context
+//        let targetCellState = grid[0][0]
+//        switch targetCellState {
+//        case .Empty:
+//            emptyColor.setFill()
+//        case .Living:
+//            livingColor.setFill()
+//        case .Born:
+//            bornColor.setFill()
+//        case .Died:
+//            diedColor.setFill()
+//        }
 
         CGContextFillRect(drawingContext, CGRectMake(0, 0, drawSize.width, drawSize.height))
         
         //set shape and fill in shape
         let path = UIBezierPath(ovalInRect: rect)
+        emptyColor.setFill()
         path.fill()
         
         // Grid lines = outline box
@@ -138,8 +149,61 @@ class GridView: UIView {
     }
     
     
+    // Problem 5
+    // Touch handlers
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        if let touch = touches.first {
+            let currentPoint = touch.locationInView(self)
+            row = Int(currentPoint.x%cellDim)
+            column = Int(currentPoint.y%cellDim)
+            
+            // Toggle CellState of touched cell
+            let newCellState: CellState = grid[row][column].toggle
+            grid[row][column] = newCellState
+            changeCellRect = CGRectMake(currentPoint.x, currentPoint.y, cellDim, cellDim)
+            
+            // Call setNeedsDisplayinRect on the changed cell
+            setNeedsDisplayInRect(rect: changeCellRect)
+        }
+    }
+    
+    override func touchesMoved(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        if let touch = touches.first {
+            let currentPoint = touch.locationInView(self)
+            row = Int(currentPoint.x%cellDim)
+            column = Int(currentPoint.y%cellDim)
+            
+            // Toggle CellState of touched cell
+            let newCellState:[CellState] = grid[row][column].toggle
+            grid[row][column] = newCellState
+            changeCellRect = CGRectMake(currentPoint.x, currentPoint.y, cellDim, cellDim)
+            
+            // Call setNeedsDisplayinRect on the changed cell
+            setNeedsDisplayInRect(rect: changeCellRect)
+        }
+    }
+    
+    override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        if let touch = touches.first {
+            let currentPoint = touch.locationInView(self)
+            row = Int(currentPoint.x%cellDim)
+            column = Int(currentPoint.y%cellDim)
+            
+            // Toggle CellState of touched cell
+            let newCellState:[CellState] = grid[row][column].toggle
+            grid[row][column] = newCellState
+            changeCellRect = CGRectMake(currentPoint.x, currentPoint.y, cellDim, cellDim)
+            
+            // Call setNeedsDisplayinRect on the changed cell
+            setNeedsDisplayInRect(rect: changeCellRect)        }
+    }
+    
+    
 // close GridView class
 }
+
+
+
 
 
 
@@ -167,6 +231,8 @@ enum CellState: String {
         }
     }
     
+    
+    
     func allValues() -> [CellState] {
         return [.Living, .Empty, .Born, .Died]
     }
@@ -182,11 +248,5 @@ enum CellState: String {
     
 }
 
-
-func initializeGrid (xdimension: Int, ydimension: Int) -> [[CellState]] {
-    var newGrid:[[CellState]] = [[]]
-    newGrid = Array(count: xdimension, repeatedValue: Array(count: ydimension, repeatedValue: .Empty))
-    return newGrid
-}
 
 

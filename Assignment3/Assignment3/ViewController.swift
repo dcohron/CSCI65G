@@ -14,8 +14,8 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
-        // Initialize the array of Cell States
-        // grid = initializeGrid(grid.row, ydimension:grid.column)
+        // set title for navigation bar
+        self.navigationItem.title = "Life Game";
     }
 
     override func didReceiveMemoryWarning() {
@@ -23,6 +23,14 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    
+    @IBAction func RunNextGen(sender: AnyObject) {
+//        var nextGrid:[[CellState]] = [[]]
+        
+        // Call function step to generate next generation grid based upon game rules
+        var nextGrid = step(grid)
+        
+    }
 
 }
 

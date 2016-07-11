@@ -26,7 +26,7 @@
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="row">
-                                        <integer key="value" value="20"/>
+                                        <integer key="value" value="2"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="color" keyPath="livingColor">
                                         <color key="value" red="0.40000000600000002" green="1" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
@@ -41,7 +41,7 @@
                                         <color key="value" white="0.33333333333333331" alpha="0.59964978448275863" colorSpace="calibratedWhite"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="number" keyPath="column">
-                                        <integer key="value" value="20"/>
+                                        <integer key="value" value="1"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="number" keyPath="gridWidth">
                                         <real key="value" value="2"/>
@@ -51,11 +51,24 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kbL-S0-rnI">
+                                <rect key="frame" x="275" y="460" width="50" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="WCC-Qf-rgK"/>
+                                    <constraint firstAttribute="width" constant="50" id="acl-As-DkU"/>
+                                </constraints>
+                                <state key="normal" title="Run"/>
+                                <connections>
+                                    <action selector="Run:" destination="BYZ-38-t0r" eventType="touchUpInside" id="1Dr-H8-rOd"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="0.93972013450000003" blue="0.12702077419999999" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="B1V-6I-kC3" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="3b5-eX-p5D"/>
                             <constraint firstItem="B1V-6I-kC3" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="T0s-68-hla"/>
+                            <constraint firstItem="kbL-S0-rnI" firstAttribute="top" secondItem="B1V-6I-kC3" secondAttribute="bottom" constant="40" id="bwI-9z-UUv"/>
+                            <constraint firstItem="kbL-S0-rnI" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="uMN-uZ-tKs"/>
                         </constraints>
                     </view>
                 </viewController>
