@@ -10,6 +10,7 @@ import UIKit
 
 
 // Declare the grid as an array of enum type CellState
+// This is dangerous but necessary to avoid pass by copy
 var grid:[[CellState]] = [[]]
 
 @IBDesignable
@@ -41,15 +42,8 @@ class GridView: UIView {
     @IBInspectable var gridColor: UIColor = UIColor.yellowColor()
     @IBInspectable var gridWidth: CGFloat = 1.0
     var cellDim: CGFloat {return CGFloat(240/row)}
-    
-    
-// Commented out error by trying to initialize value of array grid
-// Assign initial values to global variable array "grid" declared above
-//    grid = Array(count: row, repeatedValue: Array(count: column, repeatedValue: .Empty))
-//    grid = initializeGrid(row, ydimension: column)
-    
 
-// None of these initializers are working
+    
 //     Grid initializer
     func initializeGrid (xdimension: Int, ydimension: Int) -> [[CellState]] {
         var newGrid:[[CellState]] = [[]]
@@ -65,16 +59,8 @@ class GridView: UIView {
     // "I am the drawing captain now."- see Captain Phillips with Tom Hanks
     override func drawRect(rect: CGRect) {
         
-        //
         let context = UIGraphicsGetCurrentContext()
         
-//       //
-//       CGContextSetFillColorWithColor(context, UIColor.whiteColor().CGColor)
-//
-//        //
-//        CGContextFillRect(context, rect)
-//        
-
         
         //set the size
         let drawSize = CGSize(width: cellDim, height: cellDim)
@@ -222,6 +208,7 @@ class GridView: UIView {
 //  Touch handlers commented out because it through Segmentation Error at compile time
 //     Believe the source of this is in line 160 and 161 where I calculate the cell row and column
 //     from the CG points returned from touch.locationInView being out of range.
+//     BUT, if this worked it would just draw the single cell and not redraw the entire grid
     
 //    // Problem 5
 //    // Touch handlers
@@ -288,6 +275,8 @@ enum CellState: String {
     case Born = "Born"
     case Died = "Died"
     
+    
+    // Better way than described in assignment
     func betterDescription() -> String {
         return self.rawValue
     }

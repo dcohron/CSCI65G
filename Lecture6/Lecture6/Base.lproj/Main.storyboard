@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="Lecture6" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
+                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="mWf-6d-wkj">
+                                <rect key="frame" x="252" y="221" width="97" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="97" id="35w-SF-jfg"/>
+                                    <constraint firstAttribute="height" constant="30" id="yow-Bn-Pq2"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" maximumValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="ret-bA-iz1">
+                                <rect key="frame" x="253" y="286" width="94" height="29"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="29" id="P8y-0D-fIy"/>
+                                    <constraint firstAttribute="width" constant="94" id="UUz-g7-jkK"/>
+                                </constraints>
+                                <connections>
+                                    <action selector="increment:" destination="BYZ-38-t0r" eventType="valueChanged" id="4KK-6D-SEn"/>
+                                </connections>
+                            </stepper>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="ret-bA-iz1" firstAttribute="top" secondItem="mWf-6d-wkj" secondAttribute="bottom" constant="35" id="5hP-jL-vdy"/>
+                            <constraint firstItem="mWf-6d-wkj" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Cyy-me-Vmv"/>
+                            <constraint firstItem="ret-bA-iz1" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="QWh-4p-5zU"/>
+                            <constraint firstItem="ret-bA-iz1" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="VmC-dG-LU1"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="Rows" destination="mWf-6d-wkj" id="dml-wJ-1T1"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+        </scene>
+    </scenes>
+</document>

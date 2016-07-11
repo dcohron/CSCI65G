@@ -25,7 +25,11 @@ class ViewController: UIViewController {
     
     
     @IBAction func RunNextGen(sender: AnyObject) {
-//        var nextGrid:[[CellState]] = [[]]
+        
+//        // sneaky way to cause reset by changing the var row which should trigger didSet
+//        var oldRow = row
+//        row = 5
+//        row = oldrow
         
         // Call function step to generate next generation grid based upon game rules
         //  Call generates compile error so is commented out
