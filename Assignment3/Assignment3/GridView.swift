@@ -8,6 +8,10 @@
 
 import UIKit
 
+
+// Declare the grid as an array of enum type CellState
+var grid:[[CellState]] = [[]]
+
 @IBDesignable
 
 
@@ -39,9 +43,11 @@ class GridView: UIView {
     var cellDim: CGFloat {return CGFloat(240/row)}
     
     
-    var grid: [[CellState]] = initializeGrid (row, ydimension: column)
-    var nextGrid: [[CellState]] = initializeGrid (row, ydimension: column)
-    var changeGrid: [(Int,Int)] = [(0,0)]
+// Commented out error by trying to initialize value of array grid
+// Assign initial values to global variable array "grid" declared above
+//    grid = Array(count: row, repeatedValue: Array(count: column, repeatedValue: .Empty))
+//    grid = initializeGrid(row, ydimension: column)
+    
     
     // Grid initializer
     func initializeGrid (xdimension: Int, ydimension: Int) -> [[CellState]] {
@@ -93,6 +99,9 @@ class GridView: UIView {
 
         CGContextFillRect(drawingContext, CGRectMake(0, 0, drawSize.width, drawSize.height))
         
+        
+        // Something wrong here if set to 1 row and 1 column it draws one big correct image
+        // Other sizes chop the circle in parts
         //set shape and fill in shape
         let path = UIBezierPath(ovalInRect: rect)
         emptyColor.setFill()

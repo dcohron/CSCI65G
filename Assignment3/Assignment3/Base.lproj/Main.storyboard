@@ -26,7 +26,7 @@
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="row">
-                                        <integer key="value" value="2"/>
+                                        <integer key="value" value="20"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="color" keyPath="livingColor">
                                         <color key="value" red="0.40000000600000002" green="1" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
@@ -41,7 +41,7 @@
                                         <color key="value" white="0.33333333333333331" alpha="0.59964978448275863" colorSpace="calibratedWhite"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="number" keyPath="column">
-                                        <integer key="value" value="1"/>
+                                        <integer key="value" value="20"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="number" keyPath="gridWidth">
                                         <real key="value" value="2"/>
