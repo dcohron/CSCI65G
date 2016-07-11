@@ -149,54 +149,58 @@ class GridView: UIView {
     }
     
     
-    // Problem 5
-    // Touch handlers
-    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        if let touch = touches.first {
-            let currentPoint = touch.locationInView(self)
-            row = Int(currentPoint.x%cellDim)
-            column = Int(currentPoint.y%cellDim)
-            
-            // Toggle CellState of touched cell
-            let newCellState: CellState = grid[row][column].toggle
-            grid[row][column] = newCellState
-            changeCellRect = CGRectMake(currentPoint.x, currentPoint.y, cellDim, cellDim)
-            
-            // Call setNeedsDisplayinRect on the changed cell
-            setNeedsDisplayInRect(rect: changeCellRect)
-        }
-    }
+//  Touch handlers commented out because it through Segmentation Error at compile time
+//     Believe the source of this is in line 160 and 161 where I calculate the cell row and column
+//     from the CG points returned from touch.locationInView being out of range.
     
-    override func touchesMoved(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        if let touch = touches.first {
-            let currentPoint = touch.locationInView(self)
-            row = Int(currentPoint.x%cellDim)
-            column = Int(currentPoint.y%cellDim)
-            
-            // Toggle CellState of touched cell
-            let newCellState:[CellState] = grid[row][column].toggle
-            grid[row][column] = newCellState
-            changeCellRect = CGRectMake(currentPoint.x, currentPoint.y, cellDim, cellDim)
-            
-            // Call setNeedsDisplayinRect on the changed cell
-            setNeedsDisplayInRect(rect: changeCellRect)
-        }
-    }
-    
-    override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        if let touch = touches.first {
-            let currentPoint = touch.locationInView(self)
-            row = Int(currentPoint.x%cellDim)
-            column = Int(currentPoint.y%cellDim)
-            
-            // Toggle CellState of touched cell
-            let newCellState:[CellState] = grid[row][column].toggle
-            grid[row][column] = newCellState
-            changeCellRect = CGRectMake(currentPoint.x, currentPoint.y, cellDim, cellDim)
-            
-            // Call setNeedsDisplayinRect on the changed cell
-            setNeedsDisplayInRect(rect: changeCellRect)        }
-    }
+//    // Problem 5
+//    // Touch handlers
+//    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+//        if let touch = touches.first {
+//            let currentPoint = touch.locationInView(self)
+//            row = Int(currentPoint.x%cellDim)
+//            column = Int(currentPoint.y%cellDim)
+//            
+//            // Toggle CellState of touched cell
+//            let newCellState: CellState = grid[row][column].toggle
+//            grid[row][column] = newCellState
+//            var changeCellRect = CGRectMake(currentPoint.x, currentPoint.y, cellDim, cellDim)
+//            
+//            // Call setNeedsDisplayinRect on the changed cell
+//            setNeedsDisplayInRect(rect: changeCellRect)
+//        }
+//    }
+//    
+//    override func touchesMoved(touches: Set<UITouch>, withEvent event: UIEvent?) {
+//        if let touch = touches.first {
+//            let currentPoint = touch.locationInView(self)
+//            row = Int(currentPoint.x%cellDim)
+//            column = Int(currentPoint.y%cellDim)
+//            
+//            // Toggle CellState of touched cell
+//            let newCellState:[CellState] = grid[row][column].toggle
+//            grid[row][column] = newCellState
+//            changeCellRect = CGRectMake(currentPoint.x, currentPoint.y, cellDim, cellDim)
+//            
+//            // Call setNeedsDisplayinRect on the changed cell
+//            setNeedsDisplayInRect(rect: changeCellRect)
+//        }
+//    }
+//    
+//    override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
+//        if let touch = touches.first {
+//            let currentPoint = touch.locationInView(self)
+//            row = Int(currentPoint.x%cellDim)
+//            column = Int(currentPoint.y%cellDim)
+//            
+//            // Toggle CellState of touched cell
+//            let newCellState:[CellState] = grid[row][column].toggle
+//            grid[row][column] = newCellState
+//            changeCellRect = CGRectMake(currentPoint.x, currentPoint.y, cellDim, cellDim)
+//            
+//            // Call setNeedsDisplayinRect on the changed cell
+//            setNeedsDisplayInRect(rect: changeCellRect)        }
+//    }
     
     
 // close GridView class

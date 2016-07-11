@@ -34,7 +34,7 @@ func neighbors (inputTuple: (Int, Int)) -> [(Int, Int)] {
 
 // Function to count living neighbors given array of neighbors
 
-func livingNeighborsCount (neighborHood:[(Int, Int)], passedArray:[[Bool]]) -> Int {
+func livingNeighborsCount (neighborHood:[(Int, Int)], passedArray:[[CellState]]) -> Int {
     
     var count = 0
     var row = 0
@@ -43,7 +43,8 @@ func livingNeighborsCount (neighborHood:[(Int, Int)], passedArray:[[Bool]]) -> I
     for item in neighborHood {
         row = item.0
         column = item.1
-        if passedArray[row][column] {count += 1}
+        if (passedArray[row][column] == .Living) {count += 1}
+        if (passedArray[row][column] == .Born) {count += 1}
     }
     return count
 }
@@ -51,21 +52,23 @@ func livingNeighborsCount (neighborHood:[(Int, Int)], passedArray:[[Bool]]) -> I
 
 
 // Function call by View Controller. 
+// Taken directly from Assignment 2 with change for the type of array passed in
 // Invokes function neighbors instead of directly embedding that functionality
 
 func step (inputArray:[[CellState]]) -> [[CellState]] {
-    
-    // instantiate new array of CellState arrays
-    var newGeneration: [[CellState]] = Array(count: inputArray.row, repeatedValue: Array(count: inputArray.column, repeatedValue: .Empty))
+        
+    let rows = inputArray.count
+    let columns = inputArray.count
+    var newGeneration: [[CellState]] = Array(count: rows, repeatedValue: Array(count: columns, repeatedValue: .Empty))
     var neighborsAlive = 0
     var neighborHood = [(Int, Int)] ()
-    var currentCell = false
+    var currentCellState: CellState = .Empty
     
     // Main logic for function looping through array before to set array after
-    for row in 0...row {
-        for column in 0...column {
+    for row in 0...rows {
+        for column in 0...columns {
             
-            currentCell = inputArray[row][column]
+            currentCellState = inputArray[row][column]
             
             // Function call to neighbors which returns an array of 8 neighbors by row, column tuple
             
@@ -79,18 +82,36 @@ func step (inputArray:[[CellState]]) -> [[CellState]] {
             
             switch neighborsAlive {
             case 0..<2:
-                newGeneration[row][column] = false
+                switch currentCellState {
+                case .Living, .Born:
+                    newGeneration[row][column] = .Died
+                case .Died, .Empty:
+                    newGeneration[row][column] = .Empty
+                }
             case 2:
-                switch currentCell {
-                case true:
-                    newGeneration[row][column] = true
-                case false:
-                    newGeneration[row][column] = false
+                switch currentCellState {
+                case .Living, .Born:
+                    newGeneration[row][column] = .Living
+                case .Died, .Empty:
+                    newGeneration[row][column] = .Empty
                 }
             case 3:
-                newGeneration[row][column] = true
+                switch currentCellState {
+                case .Living, .Born:
+                    newGeneration[row][column] = .Living
+                case .Died:
+                    newGeneration[row][column] = .Born
+                case .Empty:
+                    newGeneration[row][column] = .Empty
+                }
             default:
-                newGeneration[row][column] = false
+                switch currentCellState {
+                case .Living, .Born:
+                    newGeneration[row][column] = .Died
+                case .Died, .Empty:
+                    newGeneration[row][column] = .Empty
+                }
+
             }
             
             

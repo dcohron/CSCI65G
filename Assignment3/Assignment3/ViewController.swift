@@ -28,7 +28,8 @@ class ViewController: UIViewController {
 //        var nextGrid:[[CellState]] = [[]]
         
         // Call function step to generate next generation grid based upon game rules
-        var nextGrid = step(grid)
+        //  Call generates compile error so is commented out
+//        var nextGrid = step(grid)
         
     }
 
