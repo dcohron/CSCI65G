@@ -17,9 +17,13 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="B1V-6I-kC3" customClass="GridView" customModule="Assignment3" customModuleProvider="target">
-                                <rect key="frame" x="158" y="95" width="240" height="128"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="B1V-6I-kC3" customClass="GridView" customModule="Assignment3" customModuleProvider="target">
+                                <rect key="frame" x="180" y="180" width="240" height="240"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="240" id="Aou-VJ-Gmt"/>
+                                    <constraint firstAttribute="height" constant="240" id="PDN-x4-ZdO"/>
+                                </constraints>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="row">
                                         <integer key="value" value="20"/>
@@ -28,10 +32,10 @@
                                         <color key="value" red="0.40000000600000002" green="1" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="color" keyPath="emptyColor">
-                                        <color key="value" red="0.40000000600000002" green="1" blue="0.40000000600000002" alpha="0.60153556034482758" colorSpace="calibratedRGB"/>
+                                        <color key="value" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="color" keyPath="bornColor">
-                                        <color key="value" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="value" red="0.40000000600000002" green="1" blue="0.40000000600000002" alpha="0.60153556029999999" colorSpace="calibratedRGB"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="color" keyPath="diedColor">
                                         <color key="value" white="0.33333333333333331" alpha="0.59964978448275863" colorSpace="calibratedWhite"/>
@@ -48,7 +52,11 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="1" green="0.93972013450000003" blue="0.12702077419999999" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="B1V-6I-kC3" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="3b5-eX-p5D"/>
+                            <constraint firstItem="B1V-6I-kC3" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="T0s-68-hla"/>
+                        </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

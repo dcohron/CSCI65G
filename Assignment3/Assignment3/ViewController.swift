@@ -13,6 +13,9 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        
+        // Initialize the array of Cell States
+        // grid = initializeGrid(grid.row, ydimension:grid.column)
     }
 
     override func didReceiveMemoryWarning() {
