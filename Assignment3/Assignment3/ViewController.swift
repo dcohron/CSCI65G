@@ -23,19 +23,27 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    @IBOutlet weak var GridPane: GridView!
     
+    
+    //    Problem 6
     @IBAction func RunNextGen(sender: AnyObject) {
         
-//        // sneaky way to cause reset by changing the var row which should trigger didSet
-//        var oldRow = row
-//        row = 5
-//        row = oldrow
-        
-        // Call function step to generate next generation grid based upon game rules
-        //  Call generates compile error so is commented out
-//        var nextGrid = step(grid)
+        // initialize new generation with random seeding
+        for x in 0..<grid.count {
+            for y in 0..<grid.count {
+                if arc4random_uniform(3) == 1 {
+                    grid[x][y] = .Living
+                }
+                else {
+                    grid[x][y] = .Empty
+                }
+            }
+        }
+
+        GridPane.setNeedsDisplay()
         
     }
-
 }
 
+    

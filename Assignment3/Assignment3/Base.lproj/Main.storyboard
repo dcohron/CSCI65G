@@ -59,7 +59,7 @@
                                 </constraints>
                                 <state key="normal" title="Run"/>
                                 <connections>
-                                    <action selector="Run:" destination="BYZ-38-t0r" eventType="touchUpInside" id="1Dr-H8-rOd"/>
+                                    <action selector="RunNextGen:" destination="BYZ-38-t0r" eventType="touchUpInside" id="x6Z-6r-X44"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -71,6 +71,9 @@
                             <constraint firstItem="kbL-S0-rnI" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="uMN-uZ-tKs"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="GridPane" destination="B1V-6I-kC3" id="HX7-4M-gw6"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>

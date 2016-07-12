@@ -67,8 +67,8 @@ func step (inputArray:[[CellState]]) -> [[CellState]] {
     var currentCellState: CellState = .Empty
     
     // Main logic for function looping through array before to set array after
-    for row in 0...rows {
-        for column in 0...columns {
+    for row in 0..<rows {
+        for column in 0..<columns {
             
             currentCellState = inputArray[row][column]
             

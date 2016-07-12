@@ -28,11 +28,13 @@ class GridView: UIView {
     @IBInspectable var row: Int = 20 {
         didSet {
             grid = initializeGrid(row, ydimension:column)
+            setNeedsDisplay()
         }
     }
     @IBInspectable var column: Int = 20 {
         didSet {
             grid = initializeGrid(row, ydimension:column)
+            setNeedsDisplay()
         }
     }
     @IBInspectable var livingColor: UIColor = UIColor.cyanColor()
@@ -54,210 +56,144 @@ class GridView: UIView {
     
     
     
+    
     // Problem 4
     //  Now draw what I want.  
     // "I am the drawing captain now."- see Captain Phillips with Tom Hanks
     override func drawRect(rect: CGRect) {
         
-        let context = UIGraphicsGetCurrentContext()
         
         
-        //set the size
-        let drawSize = CGSize(width: cellDim, height: cellDim)
+        //  Loops to draw individual cells in color corresponding to the CellState
         
-        
-        UIGraphicsBeginImageContextWithOptions(drawSize, true, 0.0)
-        let drawingContext = UIGraphicsGetCurrentContext()
-        let background: UIColor = UIColor.whiteColor()
-        background.setFill()
-        
+        for x in 0..<row {
+            for y in 0..<column {
+                //set rect for next cell
+                let cellRect:CGRect = CGRectMake((cellDim * CGFloat(x)), (cellDim * CGFloat(y)), cellDim, cellDim)
+                
+                //set the fill color for the new cell
+                switch (grid[x][y]) {
+                case .Empty:
+                    emptyColor.setFill()
+                case .Living:
+                    livingColor.setFill()
+                case .Born:
+                    bornColor.setFill()
+                case .Died:
+                    diedColor.setFill()
+                }
+                
+                let path = UIBezierPath(ovalInRect: cellRect)
+                path.fill()
+                
+                // Perhaps too clever but instead of drawing grid lines that may be overwritten
+                // Grid lines = outline box
+                //create the path
+                let outlinePath = UIBezierPath()
+                
+                //set the path's line width to the height of the stroke
+                outlinePath.lineWidth = gridWidth
+                
+                //move the initial point of the path
+                //top left corner
+                //to the start of the outline stroke
+                outlinePath.moveToPoint(CGPoint(
+                    x:0,
+                    y:0))
+                
+                //add a point to the path at the end of the stroke
+                outlinePath.addLineToPoint(CGPoint(
+                    x:bounds.width,
+                    y:0))
+                
+                //add a point to the path at the end of the stroke
+                outlinePath.addLineToPoint(CGPoint(
+                    x:bounds.width,
+                    y:bounds.height))
+                
+                //add a point to the path at the end of the stroke
+                outlinePath.addLineToPoint(CGPoint(
+                    x:0,
+                    y:bounds.height))
+                
+                //and back to the original point to close the outline box
+                outlinePath.addLineToPoint(CGPoint(
+                    x:0,
+                    y:0))
+                
+                
+                //set the stroke color
+                gridColor.setStroke()
+                
+                //draw the stroke
+                outlinePath.stroke()
 
-        CGContextFillRect(drawingContext, CGRectMake(0, 0, drawSize.width, drawSize.height))
-        
-        var cellRect:CGRect = CGRectMake(0, 0, drawSize.width, drawSize.height)
-        
-        //set shape and fill in shape
-        let path = UIBezierPath(ovalInRect: cellRect)
-        emptyColor.setFill()
-        path.fill()
-        
-        // Grid lines = outline box
-        //create the path
-        let outlinePath = UIBezierPath()
-        
-        //set the path's line width to the height of the stroke
-        outlinePath.lineWidth = gridWidth
-        
-        //move the initial point of the path
-        //top left corner
-        //to the start of the outline stroke
-        outlinePath.moveToPoint(CGPoint(
-            x:0,
-            y:0))
-        
-        //add a point to the path at the end of the stroke
-        outlinePath.addLineToPoint(CGPoint(
-            x:bounds.width,
-            y:0))
-        
-        //add a point to the path at the end of the stroke
-        outlinePath.addLineToPoint(CGPoint(
-            x:bounds.width,
-            y:bounds.height))
-            
-        //add a point to the path at the end of the stroke
-        outlinePath.addLineToPoint(CGPoint(
-            x:0,
-            y:bounds.height))
-        
-        //and back to the original point to close the outline box
-        outlinePath.addLineToPoint(CGPoint(
-            x:0,
-            y:0))
-        
-        
-        //set the stroke color
-        gridColor.setStroke()
-        
-        //draw the stroke
-        outlinePath.stroke()
-        
-        let image = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        
+            }
 
-//  This code is not working
-//  Loops to draw individual cells in color corresponding to the CellState
+        }
         
-//        for x in xdimension {
-//            for y in ydimension {
-//                //set rect for next cell
-//                cellRect:CGRect = CGRectMake((drawSize.width * x), (drawSize.height + y), drawSize.width, drawSize.height)
-//                
-//                //set the fill color for the new cell
-//                let targetCellState = grid[0][0]
-//                switch targetCellState {
-//                case .Empty:
-//                    emptyColor.setFill()
-//                case .Living:
-//                    livingColor.setFill()
-//                case .Born:
-//                    bornColor.setFill()
-//                case .Died:
-//                    diedColor.setFill()
-//                }
-//                
-//                let path = UIBezierPath(ovalInRect: cellRect)
-//                emptyColor.setFill()
-//                path.fill()
-//                
-//                // Grid lines = outline box
-//                //create the path
-//                let outlinePath = UIBezierPath()
-//                
-//                //set the path's line width to the height of the stroke
-//                outlinePath.lineWidth = gridWidth
-//                
-//                //move the initial point of the path
-//                //top left corner
-//                //to the start of the outline stroke
-//                outlinePath.moveToPoint(CGPoint(
-//                    x:0,
-//                    y:0))
-//                
-//                //add a point to the path at the end of the stroke
-//                outlinePath.addLineToPoint(CGPoint(
-//                    x:bounds.width,
-//                    y:0))
-//                
-//                //add a point to the path at the end of the stroke
-//                outlinePath.addLineToPoint(CGPoint(
-//                    x:bounds.width,
-//                    y:bounds.height))
-//                
-//                //add a point to the path at the end of the stroke
-//                outlinePath.addLineToPoint(CGPoint(
-//                    x:0,
-//                    y:bounds.height))
-//                
-//                //and back to the original point to close the outline box
-//                outlinePath.addLineToPoint(CGPoint(
-//                    x:0,
-//                    y:0))
-//                
-//                
-//                //set the stroke color
-//                gridColor.setStroke()
-//                
-//                //draw the stroke
-//                outlinePath.stroke()
-//
-//            }
-//
-//        }
-        
-        //  This is not proper but wanted to get something on the screen
-        
-        UIColor(patternImage: image).setFill()
-        CGContextFillRect(context, rect)
-
     // close drawRect
     }
     
     
-//  Touch handlers commented out because it through Segmentation Error at compile time
-//     Believe the source of this is in line 160 and 161 where I calculate the cell row and column
-//     from the CG points returned from touch.locationInView being out of range.
-//     BUT, if this worked it would just draw the single cell and not redraw the entire grid
     
-//    // Problem 5
-//    // Touch handlers
-//    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
-//        if let touch = touches.first {
-//            let currentPoint = touch.locationInView(self)
-//            row = Int(currentPoint.x%cellDim)
-//            column = Int(currentPoint.y%cellDim)
-//            
-//            // Toggle CellState of touched cell
-//            let newCellState: CellState = grid[row][column].toggle
-//            grid[row][column] = newCellState
-//            var changeCellRect = CGRectMake(currentPoint.x, currentPoint.y, cellDim, cellDim)
-//            
-//            // Call setNeedsDisplayinRect on the changed cell
-//            setNeedsDisplayInRect(rect: changeCellRect)
-//        }
-//    }
-//    
-//    override func touchesMoved(touches: Set<UITouch>, withEvent event: UIEvent?) {
-//        if let touch = touches.first {
-//            let currentPoint = touch.locationInView(self)
-//            row = Int(currentPoint.x%cellDim)
-//            column = Int(currentPoint.y%cellDim)
-//            
-//            // Toggle CellState of touched cell
-//            let newCellState:[CellState] = grid[row][column].toggle
-//            grid[row][column] = newCellState
-//            changeCellRect = CGRectMake(currentPoint.x, currentPoint.y, cellDim, cellDim)
-//            
-//            // Call setNeedsDisplayinRect on the changed cell
-//            setNeedsDisplayInRect(rect: changeCellRect)
-//        }
-//    }
-//    
-//    override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
-//        if let touch = touches.first {
-//            let currentPoint = touch.locationInView(self)
-//            row = Int(currentPoint.x%cellDim)
-//            column = Int(currentPoint.y%cellDim)
-//            
-//            // Toggle CellState of touched cell
-//            let newCellState:[CellState] = grid[row][column].toggle
-//            grid[row][column] = newCellState
-//            changeCellRect = CGRectMake(currentPoint.x, currentPoint.y, cellDim, cellDim)
-//            
-//            // Call setNeedsDisplayinRect on the changed cell
-//            setNeedsDisplayInRect(rect: changeCellRect)        }
-//    }
+    //  Touch handlers commented out because it through Segmentation Error at compile time
+    //     Believe the source of this is in line 160 and 161 where I calculate the cell row and column
+    //     from the CG points returned from touch.locationInView being out of range.
+    //     BUT, if this worked it would just draw the single cell and not redraw the entire grid
+    
+    // Problem 5
+    // Touch handlers
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        if let touch = touches.first {
+            let currentPoint = touch.locationInView(self)
+            row = UInt(currentPoint.x/cellDim)
+            column = UInt(currentPoint.y/cellDim)
+            
+            // Toggle CellState of touched cell
+            let newCellState: CellState = grid[row][column].toggle
+            grid[row][column] = newCellState
+            var changeCellRect = CGRectMake(currentPoint.x, currentPoint.y, cellDim, cellDim)
+            
+            // Call setNeedsDisplayinRect on the changed cell
+            setNeedsDisplayInRect(rect: changeCellRect)
+        }
+    }
+    
+        override func touchesMoved(touches: Set<UITouch>, withEvent event: UIEvent?) {
+            if let touch = touches.first {
+                let currentPoint = touch.locationInView(self)
+                row = UInt(currentPoint.x/cellDim)
+                column = UInt(currentPoint.y/cellDim)
+            
+                // Toggle CellState of touched cell
+                let newCellState: CellState = grid[row][column].toggle
+                grid[row][column] = newCellState
+                var changeCellRect = CGRectMake(currentPoint.x, currentPoint.y, cellDim, cellDim)
+            
+                // Call setNeedsDisplayinRect on the changed cell
+                setNeedsDisplayInRect(rect: changeCellRect)
+            }
+        }
+    
+        override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
+            if let touch = touches.first {
+                let currentPoint = touch.locationInView(self)
+                row = UInt(currentPoint.x/cellDim)
+                column = UInt(currentPoint.y/cellDim)
+
+    
+                // Toggle CellState of touched cell
+                let newCellState:[CellState] = grid[row][column].toggle
+                grid[row][column] = newCellState
+                changeCellRect = CGRectMake(currentPoint.x, currentPoint.y, cellDim, cellDim)
+                
+                // Call setNeedsDisplayinRect on the changed cell
+                setNeedsDisplayInRect(rect: changeCellRect)
+            }
+        }
+
+
     
     
 // close GridView class
@@ -310,6 +246,9 @@ enum CellState: String {
     }
     
 }
+
+
+
 
 
 
