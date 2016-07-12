@@ -11,7 +11,7 @@ import UIKit
 
 // Declare the grid as an array of enum type CellState
 // This is dangerous but necessary to avoid pass by copy
-var grid:[[CellState]] = [[]]
+var grid:[[CellState]] = []
 
 @IBDesignable
 
@@ -48,7 +48,7 @@ class GridView: UIView {
     
 //     Grid initializer
     func initializeGrid (xdimension: Int, ydimension: Int) -> [[CellState]] {
-        var newGrid:[[CellState]] = [[]]
+        var newGrid:[[CellState]] = []
         newGrid = Array(count: xdimension, repeatedValue: Array(count: ydimension, repeatedValue: .Empty))
         return newGrid
     }
@@ -137,60 +137,45 @@ class GridView: UIView {
     
     
     
-    //  Touch handlers commented out because it through Segmentation Error at compile time
-    //     Believe the source of this is in line 160 and 161 where I calculate the cell row and column
-    //     from the CG points returned from touch.locationInView being out of range.
-    //     BUT, if this worked it would just draw the single cell and not redraw the entire grid
+    //  Touch handler crashes at line 176 for "EXC BAD Instruction" and have rewritten code many different ways
+    //     and tracked through breakpoints in debugger and Googled error, Alas dear Yorrick,to no avail.
+    //     BUT, if this worked it should just draw the single cell and not redraw the entire grid
     
     // Problem 5
     // Touch handlers
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         if let touch = touches.first {
-            let currentPoint = touch.locationInView(self)
-            row = UInt(currentPoint.x/cellDim)
-            column = UInt(currentPoint.y/cellDim)
-            
-            // Toggle CellState of touched cell
-            let newCellState: CellState = grid[row][column].toggle
-            grid[row][column] = newCellState
-            var changeCellRect = CGRectMake(currentPoint.x, currentPoint.y, cellDim, cellDim)
-            
-            // Call setNeedsDisplayinRect on the changed cell
-            setNeedsDisplayInRect(rect: changeCellRect)
+//            self.allPoints[touch ] = [CGPoint]()
+//            self.colors[touch ] = self.strokeColor
+            self.processTouch(touch)
         }
     }
     
         override func touchesMoved(touches: Set<UITouch>, withEvent event: UIEvent?) {
             if let touch = touches.first {
-                let currentPoint = touch.locationInView(self)
-                row = UInt(currentPoint.x/cellDim)
-                column = UInt(currentPoint.y/cellDim)
-            
-                // Toggle CellState of touched cell
-                let newCellState: CellState = grid[row][column].toggle
-                grid[row][column] = newCellState
-                var changeCellRect = CGRectMake(currentPoint.x, currentPoint.y, cellDim, cellDim)
-            
-                // Call setNeedsDisplayinRect on the changed cell
-                setNeedsDisplayInRect(rect: changeCellRect)
+                self.processTouch(touch)
             }
         }
     
         override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
             if let touch = touches.first {
-                let currentPoint = touch.locationInView(self)
-                row = UInt(currentPoint.x/cellDim)
-                column = UInt(currentPoint.y/cellDim)
+                self.processTouch(touch)
+            }
+        }
 
     
-                // Toggle CellState of touched cell
-                let newCellState:[CellState] = grid[row][column].toggle
-                grid[row][column] = newCellState
-                changeCellRect = CGRectMake(currentPoint.x, currentPoint.y, cellDim, cellDim)
-                
-                // Call setNeedsDisplayinRect on the changed cell
-                setNeedsDisplayInRect(rect: changeCellRect)
-            }
+        // Same code to process all three touch types
+        func processTouch(touch: UITouch) {
+            let currentPoint = touch.locationInView(self)
+            let rowWidth = self.bounds.width/CGFloat(row)
+            let columnHeight = self.bounds.height/CGFloat(column)
+            row = Int(floor(currentPoint.x/rowWidth))
+            column = Int(floor(currentPoint.y/columnHeight))
+            
+            // Toggle CellState of touched cell
+            grid[row][column] = CellState.toggle(grid[row][column])
+            let changeCellRect:CGRect = CGRectMake((rowWidth * CGFloat(row)), (columnHeight * CGFloat(column)), cellDim, cellDim)
+            setNeedsDisplayInRect(changeCellRect)
         }
 
 
@@ -216,7 +201,7 @@ enum CellState: String {
     func betterDescription() -> String {
         return self.rawValue
     }
-    
+    //  No reason to use Switch except called for explicitly in assignment
     func description() -> String {
         switch self {
         case Living:
@@ -236,7 +221,7 @@ enum CellState: String {
         return [.Living, .Empty, .Born, .Died]
     }
     
-    func toggle(value: CellState) -> CellState {
+    static func toggle(value: CellState) -> CellState {
         switch value {
         case .Empty, .Died:
             return .Living

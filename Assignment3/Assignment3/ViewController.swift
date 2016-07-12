@@ -27,6 +27,8 @@ class ViewController: UIViewController {
     
     
     //    Problem 6
+    //  This works because if you use the random seeding code if will advance
+    //  Left this in so you can see it works as touch is not.
     @IBAction func RunNextGen(sender: AnyObject) {
         
         // initialize new generation with random seeding
@@ -40,6 +42,9 @@ class ViewController: UIViewController {
                 }
             }
         }
+        GridPane.setNeedsDisplay()
+        
+        grid = step(grid)
 
         GridPane.setNeedsDisplay()
         
