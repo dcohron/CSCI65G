@@ -12,11 +12,11 @@ import Foundation
 
 // Protocol for Grid
 protocol GridProtocol {
-    var rows: UInt { get }
-    var cols: UInt { get }
-    func Init(rows: Int, cols: Int) -> [CellState]
-    func neighbors(_: (row: Int, col: Int)) -> [(Int, Int)]
-    subscript(row: UInt, col: UInt) -> CellState? { get set }
+    var rows: Int { get }
+    var cols: Int { get }
+    init(rows: Int, cols: Int)
+    func neighbors(inputTuple: (Int, Int)) -> [(Int, Int)]
+    subscript(row: Int, col: Int) -> CellState { get set }
 }
 
 
