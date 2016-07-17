@@ -16,8 +16,6 @@ class Grid: GridProtocol {
     var grid: [CellState]
     
     required init(rows: Int, cols: Int) {
-//        let row = self.rows
-//        let col = self.cols
         grid = Array(count: rows * cols, repeatedValue: .Empty)
     }
     

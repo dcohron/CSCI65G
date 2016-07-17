@@ -8,18 +8,46 @@
 
 import Foundation
 
+//
+//// Protocol which sets up the engine type
+//protocol EngineProtocol {
+//    var delegate: EngineDelegate? { get set }
+//    var grid: GridProtocol { get }
+//    var refreshRate: Double {get set}
+//    var refreshTimer: NSTimer {get set}
+//    var rows: Int {get set}
+//    var cols: Int {get set}
+//    init(rows: Int, cols: Int)
+//    func step() -> GridProtocol
+//}
+
+
 
 //  Main Game Engine
 
 class StandardEngine: EngineProtocol {
-    var delegate: EngineDelegate?
-    func engineDidUpdate() -> [[Bool]] {
-        return [[false]]
-    }
-
-    var refreshRate: Double = 0.0
     
-    var rows: Int = 10 {
+    private static var _sharedInstance = StandardEngine()
+    static var sharedInstance: StandardEngine {
+        get {
+            return _sharedInstance
+        }
+    }
+    
+    var delegate: EngineDelegate? {
+        get {
+            return self.delegate
+        }
+        set (newValue) {
+            self.delegate = newValue
+            return
+        }
+    }
+    
+    var grid:Grid {return self.grid}
+    
+    
+    var rows:Int=10 {
         didSet {
             if let delegate = delegate {
                 delegate.currentGrid(self, didUpdateRows: self.rows)
@@ -27,7 +55,7 @@ class StandardEngine: EngineProtocol {
         }
     }
 
-    var cols: Int = 10 {
+    var cols:Int=10 {
         didSet {
             if let delegate = delegate {
                 delegate.currentGrid(self, didUpdateColumns: self.rows)
@@ -35,88 +63,87 @@ class StandardEngine: EngineProtocol {
         }
     }
 
-
-
-
-    private var cellCount: UInt = {return rows * cols}
-    private var currentGrid : [CellState] =  Array<CellState>(count: cellCount, repeatedValue: .Empty)
-        
-    subscript(row: Int, col: Int) -> CellState? {
-        get {
-            if row < 0 || row >= rows || col < 0 || col >= cols { return nil }
-            if currentGrid.count < Int(row*col) { return nil }
-            return currentGrid[Int(row * col + col)]
-        }
-        set (newValue) {
-            if newValue == nil { return }
-            if row < 0 || row >= rows || col < 0 || col >= cols { return }
-            currentGrid[Int(row*col + col)] = newValue!
+    private var refreshTimer: NSTimer?
+    
+    var refreshRate: Double = 0.0 {
+        didSet {
+            if refreshRate != 0.0 {
+                if let timer = refreshTimer { timer.invalidate() }
+                let sel = #selector(StandardEngine.timerDidFire(_:))
+                refreshTimer = NSTimer.scheduledTimerWithTimeInterval(refreshRate,
+                                                               target: self,
+                                                               selector: sel,
+                                                               userInfo: ["name": "fred"],
+                                                               repeats: true)
+            }
+            else if let timer = refreshTimer {
+                timer.invalidate()
+                self.refreshTimer = nil
+            }
         }
     }
 
-    internal var refreshTimer: NSTimer
+
+
+//    private var cellCount: Int = {return rows * cols}
+    var currentGrid: Grid = []
     
     
-    func Init(rows: UInt, cols: UInt)-> [CellState] {
-        let cellCount: Int = Int(rows * cols)
-        let instanceOfGrid =  Array<CellState>(count: cellCount, repeatedValue: .Empty)
-        return instanceOfGrid
+    required init(rows: Int, cols: Int) {
+        _ =  Grid(rows: rows, cols: cols)
     }
     
     
     
-    func step (inputArray:GridProtocol) -> GridProtocol {
-        var newGeneration = Init(rows, cols: cols)
+    func step (inputArray:Grid) -> Grid {
+        let newGeneration:Grid
         var neighborsAlive = 0
         var neighborHood = [(Int, Int)] ()
         var currentCellState: CellState = .Empty
         
         // Main logic for function looping through array before to set array after
-        for row in 0..<rows {
-            for column in 0..<cols {
+        for row in 0..<inputArray.rows {
+            for column in 0..<inputArray.cols {
                 
-                currentCellState = inputArray[row][column]
+                currentCellState = inputArray[row, column]
                 
                 // Function call to neighbors which returns an array of 8 neighbors by row, column tuple
-                
-                neighborHood = neighbors((row, column))
+                neighborHood = inputArray.neighbors((row, column))
                 
                 // Function call to livingNeighborsCount to get number of living neighbors
+                neighborsAlive = inputArray.livingNeighborsCount(neighborHood, passedArray: inputArray)
                 
-                neighborsAlive = livingNeighborsCount(neighborHood, passedArray: inputArray)
-                
-                // Set array after for one cell based on game logic switch on number of living neighbors
-                
+                // Set nextGeneration array for one cell based on game logic switch on number of living neighbors
                 switch neighborsAlive {
                 case 0..<2:
                     switch currentCellState {
                     case .Living, .Born:
-                        newGeneration[row][column] = .Died
+                        newGeneration[row, column] = .Died
                     case .Died, .Empty:
-                        newGeneration[row][column] = .Empty
+                        newGeneration[row, column] = .Empty
                     }
                 case 2:
                     switch currentCellState {
                     case .Living, .Born:
-                        newGeneration[row][column] = .Living
+                        newGeneration[row, column] = .Living
                     case .Died, .Empty:
-                        newGeneration[row][column] = .Empty
+                        newGeneration[row, column] = .Empty
                     }
                 case 3:
                     switch currentCellState {
                     case .Living, .Born:
-                        newGeneration[row][column] = .Living
+                        newGeneration[row, column] = .Living
                     case .Died:
-                        newGeneration[row][column] = .Born
+                        newGeneration[row, column] = .Born
                     case .Empty:
-                        newGeneration[row][column] = .Empty
+                        newGeneration[row, column] = .Empty
                     }
                 default:
                     switch currentCellState {
                     case .Living, .Born:
-                        newGeneration[row][column] = .Died
+                        newGeneration[row, column] = .Died
                     case .Died, .Empty:
-                        newGeneration[row][column] = .Empty
+                        newGeneration[row, column] = .Empty
                     }
                     
                 }
@@ -129,47 +156,21 @@ class StandardEngine: EngineProtocol {
     }
 
     
+    func engineDidUpdate() -> [[Bool]] {
+        return [[false]]
+    }
     
-//    // Function that takes and tuple (row, column) and returns an array of tuples for location of all neighbors.
-//    
-//    func neighbors (inputTuple: (Int, Int)) -> [(Int, Int)] {
-//        var neighborArray = [(Int, Int)] ()
-//        let row = inputTuple.0
-//        let column = inputTuple.1
-//        
-//        neighborArray = [((row + 1)%10, (column + 9)%10)]
-//        neighborArray.append((((row + 1)%10), column))
-//        neighborArray.append((((row + 1)%10), ((column + 1)%10)))
-//        neighborArray.append((row, ((column + 9)%10)))
-//        neighborArray.append((row, ((column + 1)%10)))
-//        neighborArray.append((((row + 9)%10), ((column + 9)%10)))
-//        neighborArray.append((((row + 9)%10), column))
-//        neighborArray.append((((row + 9)%10), ((column + 1)%10)))
-//        
-//        return neighborArray
-//    }
-//    
-//    
-//    
-//    // Function to count living neighbors given array of neighbors
-//    
-//    func livingNeighborsCount (neighborHood:[(Int, Int)], passedArray: GridProtocol) -> Int {
-//        
-//        var count = 0
-//        var row: Int = 0
-//        var column: Int = 0
-//        
-//        for item in neighborHood {
-//            row = item.0
-//            column = item.1
-//            if (passedArray[row][column] == .Living) {count += 1}
-//            if (passedArray[row][column] == .Born) {count += 1}
-//        }
-//        return count
-//    }
+    
+    @objc func timerDidFire(timer:NSTimer) {
+        self.rows += 1
+        let center = NSNotificationCenter.defaultCenter()
+        let n = NSNotification(name: "ExampleNotification",
+                               object: nil,
+                               userInfo: ["name": "fred"])
+        center.postNotification(n)
+        print ("\(timer.userInfo?["name"] ?? "not fred")")
+    }
 
-    
-    
     
 // Close class Standard Engine
 }

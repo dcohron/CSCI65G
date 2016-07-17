@@ -10,7 +10,7 @@
 
 import Foundation
 
-// Protocol for Grid
+// Protocol for the game grid
 protocol GridProtocol {
     var rows: Int { get }
     var cols: Int { get }
@@ -23,24 +23,21 @@ protocol GridProtocol {
 //  Protocol for Engine Delegate
 //  returns String???????
 protocol EngineDelegate {
-    func engineDidUpdate(withGrid: GridProtocol) -> String
+    func engineDidUpdate(withGrid: GridProtocol)
 }
 
 
 // Protocol which sets up the engine type
 protocol EngineProtocol {
     var delegate: EngineDelegate? { get set }
-    var currentGrid: GridProtocol { get }
+    var grid: GridProtocol { get }
     var refreshRate: Double {get set}
     var refreshTimer: NSTimer {get set}
-    var rows: UInt {get set}
-    var cols: UInt {get set}
-    func Init(rows: UInt, cols: UInt)-> GridProtocol
+    var rows: Int {get set}
+    var cols: Int {get set}
+    init(rows: Int, cols: Int)
     func step() -> GridProtocol
 }
-
-
-
 
 
 // Problem #1
