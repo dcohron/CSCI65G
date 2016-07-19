@@ -10,6 +10,17 @@ import UIKit
 
 class StatisticsViewController: UIViewController {
     
+    @IBOutlet weak var numberText: UITextField!
+    
+    @IBOutlet weak var livingText: UITextField!
+    
+    @IBOutlet weak var bornText: UITextField!
+    
+    @IBOutlet weak var diedText: UITextField!
+    
+    @IBOutlet weak var emptyText: UITextField!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -19,6 +30,14 @@ class StatisticsViewController: UIViewController {
         
         // Modify the display title on the tab bar
         self.tabBarItem.title = "Statistics";
+        
+        // Display statistics by calling function gridCount
+        let stats = gridCount(currentGrid)
+        livingText.text = String(stats.0)
+        bornText.text = String(stats.1)
+        diedText.text = String(stats.2)
+        emptyText.text = String(stats.3)
+        
     }
     
     override func didReceiveMemoryWarning() {

@@ -35,7 +35,7 @@ class Grid: GridProtocol {
     }
 
     
-    // Function that takes and tuple (row, column) and returns an array of tuples for location of all neighbors.
+    // Function that takes a tuple (row, column) and returns an array of tuples for location of all neighbors.
     func neighbors (inputTuple: (Int, Int)) -> [(Int, Int)] {
         var neighborArray = [(Int, Int)] ()
         let row = inputTuple.0
@@ -70,7 +70,34 @@ class Grid: GridProtocol {
         }
         return count
     }
-
+    
+    //  Function to count number of each type of CellState in array
+    func gridCount (passedArray: Grid) -> (Int, Int, Int, Int) {
+        let rows = self.rows
+        let cols = self.cols
+        var livingCount = 0
+        var bornCount = 0
+        var diedCount = 0
+        var emptyCount = 0
+        
+        for row in 0..<rows {
+            for col in 0..<cols {
+                switch (passedArray[row, col]) {
+                case .Empty:
+                    emptyCount += emptyCount
+                case .Living:
+                    livingCount += livingCount
+                case .Born:
+                    bornCount += bornCount
+                case .Died:
+                    diedCount += diedCount
+                }
+            }
+        }
+        return (livingCount, bornCount, diedCount, emptyCount)
+    }
+    
+    
     
 
 // Close class Grid
