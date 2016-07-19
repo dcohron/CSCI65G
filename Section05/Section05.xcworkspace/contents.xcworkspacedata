@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workspace
+   version = "1.0">
+   <FileRef
+      location = "group:SimpleCoreGraphics.playground">
+   </FileRef>
+   <FileRef
+      location = "group:Paths.playground">
+   </FileRef>
+   <FileRef
+      location = "group:Text.playground">
+   </FileRef>
+   <FileRef
+      location = "group:TShirt.playground">
+   </FileRef>
+   <FileRef
+      location = "group:Graphs.playground">
+   </FileRef>
+   <FileRef
+      location = "group:Images.playground">
+   </FileRef>
+   <FileRef
+      location = "group:Section05/Section05.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:Section05Views/Section05Views.xcodeproj">
+   </FileRef>
+</Workspace>

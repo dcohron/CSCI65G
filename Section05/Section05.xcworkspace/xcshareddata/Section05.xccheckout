@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>E83EBEE2-168E-4B13-8C52-2DF0628116F9</string>
+	<key>IDESourceControlProjectName</key>
+	<string>Section05</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>2DD4EB43043ED7FB9462FBFBF32FA7BF0AB2BB10</key>
+		<string>github.com:NashvilleSoftwareSchool/MobileDevelopmentClass.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>Section05/Section05.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>2DD4EB43043ED7FB9462FBFBF32FA7BF0AB2BB10</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>github.com:NashvilleSoftwareSchool/MobileDevelopmentClass.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>2DD4EB43043ED7FB9462FBFBF32FA7BF0AB2BB10</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>2DD4EB43043ED7FB9462FBFBF32FA7BF0AB2BB10</string>
+			<key>IDESourceControlWCCName</key>
+			<string>MobileDevelopmentClass</string>
+		</dict>
+	</array>
+</dict>
+</plist>

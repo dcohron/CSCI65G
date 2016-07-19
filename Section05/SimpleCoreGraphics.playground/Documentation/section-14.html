@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Section 15</title>
+  <meta id="xcode-display" name="xcode-display" content="render">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, maximum-scale=1.0">
+  <link rel="stylesheet" type="text/css" href="stylesheet.css">
+</head>
+<body>
+<div class="content-wrapper">
+  <section class="section">
+    <p>Create the inner view.  We then change a lot of its characteristics by adjusting properties of its layer as well.  Creating interesting UI requires both drawing and property manipulation.  Note that property manipulation is NOT done in the drawRect(rect:) method.  There are two reasons for this:</p>
+<ol>
+<li>By then it’s too late, you are already drawing on the CALayer</li>
+<li>Drawing is expensive and is done A LOT.  You want you drawRect() methods to be as small as possible</li>
+</ol>
+
+  </section>
+</div>
+</body>
+</html>
