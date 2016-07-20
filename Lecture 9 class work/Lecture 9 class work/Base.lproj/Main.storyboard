@@ -3,12 +3,13 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--Root View Controller-->
         <scene sceneID="YTl-xs-lmn">
             <objects>
-                <tableViewController id="TrV-7A-m1X" customClass="ViewController" customModule="Lecture_9_class_work" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="TrV-7A-m1X" customClass="MainViewController" customModule="Lecture_9_class_work" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="q0f-Ho-J5Q">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -29,6 +30,9 @@
                                         </label>
                                     </subviews>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="k7n-QT-Eo4" kind="show" id="QUI-o8-Jhb"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -63,6 +67,57 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tI3-hI-qCo" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-70" y="345"/>
+        </scene>
+        <!--Edit-->
+        <scene sceneID="BWF-wL-Jat">
+            <objects>
+                <viewController id="k7n-QT-Eo4" userLabel="Edit" customClass="EditViewController" customModule="Lecture_9_class_work" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="G69-p3-SSX"/>
+                        <viewControllerLayoutGuide type="bottom" id="pxh-sM-IR5"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="677-UC-uJv">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="4MJ-We-GRI">
+                                <rect key="frame" x="20" y="72" width="560" height="32"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="32" id="HLl-dg-tDa"/>
+                                    <constraint firstAttribute="height" constant="30" id="bE5-sc-mJA"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="bE5-sc-mJA"/>
+                                    </mask>
+                                </variation>
+                            </textField>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="4MJ-We-GRI" firstAttribute="leading" secondItem="677-UC-uJv" secondAttribute="leadingMargin" id="0Zb-xt-wWD"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="4MJ-We-GRI" secondAttribute="trailing" id="AI7-Rk-VMq"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="4MJ-We-GRI" secondAttribute="trailing" id="RFC-Gq-bvS"/>
+                            <constraint firstItem="4MJ-We-GRI" firstAttribute="top" secondItem="G69-p3-SSX" secondAttribute="bottom" constant="8" id="Wuk-rJ-XNh"/>
+                            <constraint firstItem="4MJ-We-GRI" firstAttribute="leading" secondItem="677-UC-uJv" secondAttribute="leadingMargin" id="zIA-OF-Xhm"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Edit" id="FxJ-qo-aZr" userLabel="Edit">
+                        <barButtonItem key="rightBarButtonItem" title="Save" id="V0Z-Yj-LkL">
+                            <connections>
+                                <action selector="save:" destination="k7n-QT-Eo4" id="2ad-Mv-uCJ"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="nameTextField" destination="4MJ-We-GRI" id="yhd-6p-jiw"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ety-Ii-CLD" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1452" y="345"/>
         </scene>
     </scenes>
 </document>
