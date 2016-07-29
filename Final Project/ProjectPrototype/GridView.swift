@@ -22,7 +22,7 @@ class GridView: UIView {
         super.drawRect(rect)
     }
     
-    func drawCell(rect: CGRect, cellState: CellState) {
+    func drawCell(rect: CGRect, cellState: CellState) -> (){
         var color = emptyColor
         
         switch cellState {
