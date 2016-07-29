@@ -23,7 +23,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Td4-5L-Pbc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-586" y="-343"/>
+            <point key="canvasLocation" x="-250" y="-325"/>
         </scene>
         <!--Simulation-->
         <scene sceneID="wg7-f3-ORb">
@@ -336,11 +336,13 @@
                             <constraint firstItem="5ha-7r-YZT" firstAttribute="trailing" secondItem="iSh-FR-kEh" secondAttribute="trailingMargin" id="wfX-ik-h1n"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Instrumentation" id="gDW-YP-Umt"/>
+                    <navigationItem key="navigationItem" title="Instrumentation" id="gDW-YP-Umt">
+                        <barButtonItem key="rightBarButtonItem" title="+" id="aQg-Y8-Flp"/>
+                    </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uEm-V0-cAv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="741" y="-359"/>
+            <point key="canvasLocation" x="750" y="-325"/>
         </scene>
         <!--Configurations-->
         <scene sceneID="g6B-wP-7i9">
@@ -371,7 +373,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nEm-CY-BYt" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1585" y="-343"/>
+            <point key="canvasLocation" x="1585" y="-335"/>
         </scene>
         <!--ConfigurationEditor-->
         <scene sceneID="cPm-tS-AT5">

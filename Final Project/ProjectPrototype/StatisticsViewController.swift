@@ -20,7 +20,7 @@ import UIKit
 class StatisticsViewController: UIViewController {
 
     
-    @IBOutlet weak var livingTextBox: UITextField!
+    @IBOutlet weak var aliveTextBox: UITextField!
    
     @IBOutlet weak var bornTextBox: UITextField!
     
@@ -39,6 +39,13 @@ class StatisticsViewController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        aliveTextBox.text = String(StandardEngine.sharedInstance.grid.alive)
+        bornTextBox.text = String(StandardEngine.sharedInstance.grid.born)
+        diedTextBox.text = String(StandardEngine.sharedInstance.grid.died)
+        emptyTextBox.text = String(StandardEngine.sharedInstance.grid.empty)
     }
     
 }

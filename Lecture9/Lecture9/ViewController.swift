@@ -20,25 +20,47 @@ class ViewController: UITableViewController {
     }
     
     override func viewDidAppear(animated: Bool) {
+        
+//  1)  Data like for final project
+        
         let url = NSURL(string: "https://dl.dropboxusercontent.com/u/7544475/S65g.json")!
         
-//        let url = NSURL(string: "http://api.openweathermap.org/data/2.5/weather?q=boston,%20ma&appid=77e555f36584bc0c3d55e1e584960580")!
+        let array = [[String: AnyObject]]()
+        
         let fetcher = Fetcher()
         fetcher.requestJSON(url) { (json, message) in
             if let json = json,
-                dict = json as? Dictionary<String, AnyObject> {
-                print(dict)
-                    let keys = dict.keys
-                    self.names = Array(keys)
-                    print(self.names)
-                    let op = NSBlockOperation {
-                        self.tableView.reloadData()
+                array = json as? [[String: AnyObject]] {
+                    let titles: [(title: String, contents: [(Int, Int)])] = array.map { (array) -> (title: String, contents: [(Int, Int)]) in
+                        return (title: array["title"]! as! String, contents: array["contents"]! as! [(Int, Int)])
                     }
-                NSOperationQueue.mainQueue().addOperation(op)
-                
                 }
-            else {print("JSON- ERROR")}
+                print(array)
+                let op = NSBlockOperation {
+                    self.tableView.reloadData()
+                }
+            NSOperationQueue.mainQueue().addOperation(op)
         }
+        
+//  2) Data for class example. Do one or the other as data is different structure
+        
+//        let url = NSURL(string: "http://api.openweathermap.org/data/2.5/weather?q=boston,%20ma&appid=77e555f36584bc0c3d55e1e584960580")!
+//        let fetcher = Fetcher()
+//        fetcher.requestJSON(url) { (json, message) in
+//            if let json = json,
+//                dict = json as? Dictionary<String, AnyObject> {
+//                print(dict)
+//                    let keys = dict.keys
+//                    self.names = Array(keys)
+//                    print(self.names)
+//                    let op = NSBlockOperation {
+//                        self.tableView.reloadData()
+//                    }
+//                NSOperationQueue.mainQueue().addOperation(op)
+//                
+//                }
+//            else {print("JSON- ERROR")}
+//        }
     }
     
     

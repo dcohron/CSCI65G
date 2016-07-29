@@ -12,7 +12,7 @@
 
 import UIKit
 
-class SimulationViewController: UIViewController {
+class SimulationViewController: UIViewController, EngineDelegate {
     
     
     //  Call engine and advance one generation
@@ -32,6 +32,8 @@ class SimulationViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
+        StandardEngine.sharedInstance.delegate = self
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -39,6 +41,25 @@ class SimulationViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
-
+    // Draw entire grid
+    func engineDidUpdate(withGrid: GridProtocol) {
+        
+        var xDim: CGFloat {return CGFloat(240/withGrid.cols)}
+        var yDim: CGFloat {return CGFloat(240/withGrid.rows)}
+                
+        // Call for redraw of entire grid, one cell at a time
+        for x in 0..<withGrid.cols {
+            for y in 0..<withGrid.rows {
+                //set rect for next cell
+                let cellRect:CGRect = CGRectMake((xDim * CGFloat(x)), (yDim * CGFloat(y)), xDim, yDim)
+                let cellState: CellState = withGrid(i:x, j:y)
+                
+                // Function call to draw cell
+                drawCell(rect: cellRect, cellState: CellState)
+            }
+        }
+    }
+    
+// Close the SimulationViewController class definition
 }
 
