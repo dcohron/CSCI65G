@@ -14,6 +14,7 @@ import UIKit
 
 class SimulationViewController: UIViewController, EngineDelegate {
     
+    let gridViewGrid: GridView = GridView()
     
     //  Call engine and advance one generation
     @IBAction func stepButton(sender: AnyObject) {
@@ -55,7 +56,7 @@ class SimulationViewController: UIViewController, EngineDelegate {
                 let cellState: CellState = withGrid(i:x, j:y)
                 
                 // Function call to draw cell
-                drawCell(rect: cellRect, cellState: CellState)
+                gridViewGrid.drawCell(cellRect, cellState: CellState)
             }
         }
     }

@@ -8,11 +8,29 @@
 
 import UIKit
 
+
+struct configData {
+    let title: String
+    let contents: Array<(Int, Int)>
+    
+    static func fromJSON (json: AnyObject) -> configData {
+        if let dict = json as? Dictionary<String, AnyObject> {
+            let title = dict["title"] as? String
+            let contents = dict["contents"] as? Array<(Int, Int)>
+            return configData(title: title!, contents: contents!)
+        }
+    }
+}
+
+
+
+
 class ViewController: UITableViewController {
     
 //    private var names = ["Van", "Nate", "JP"]
     
     private var names:Array<String> = []
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,21 +43,33 @@ class ViewController: UITableViewController {
         
         let url = NSURL(string: "https://dl.dropboxusercontent.com/u/7544475/S65g.json")!
         
-        let array = [[String: AnyObject]]()
+        let array = [configData]()
         
         let fetcher = Fetcher()
         fetcher.requestJSON(url) { (json, message) in
-            if let json = json,
-                array = json as? [[String: AnyObject]] {
-                    let titles: [(title: String, contents: [(Int, Int)])] = array.map { (array) -> (title: String, contents: [(Int, Int)]) in
-                        return (title: array["title"]! as! String, contents: array["contents"]! as! [(Int, Int)])
-                    }
-                }
-                print(array)
-                let op = NSBlockOperation {
-                    self.tableView.reloadData()
-                }
-            NSOperationQueue.mainQueue().addOperation(op)
+            if let json = json {
+                
+           
+//                    array = json as? [[String: AnyObject]] {
+//                        let titles: [(title: String, contents: [(Int, Int)])] = array.map { (array) -> (title: String, contents: [(Int, Int)]) in
+//                            return (title: array["title"]! as! String, contents: array["contents"]! as! [(Int, Int)])
+//                        }
+//                    }
+                
+                
+                let array: Array<configData> = (json as! Array<AnyObject>).map({ return configData.fromJSON($0)})
+            }
+            
+            //  Need array of titles to feed names for tableView
+//            self.names = Array(arrayLiteral: self.title!)
+//            self.names = array.map({array: [[String:[(Int, Int)]]] -> String return $0(key)})
+            self.names = array.map({ $0(0)})
+            
+            print(array)
+            let op = NSBlockOperation {
+                self.tableView.reloadData()
+            }
+                NSOperationQueue.mainQueue().addOperation(op)
         }
         
 //  2) Data for class example. Do one or the other as data is different structure
