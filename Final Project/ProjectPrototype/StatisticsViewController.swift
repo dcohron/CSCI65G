@@ -12,13 +12,13 @@
 
 //  Should statistics change as timer causes to advance grid, or just static on load?
 
-//  Pass grid for calculation or just counts?
 
 
 import UIKit
 
 class StatisticsViewController: UIViewController {
 
+    @IBOutlet weak var generationBox: UITextField!
     
     @IBOutlet weak var aliveTextBox: UITextField!
    
@@ -42,6 +42,13 @@ class StatisticsViewController: UIViewController {
     }
     
     override func viewWillAppear(animated: Bool) {
+        displayCounts()
+    }
+    
+    
+    
+    func displayCounts() {
+        generationBox.text = String(StandardEngine.sharedInstance.genCount)
         aliveTextBox.text = String(StandardEngine.sharedInstance.grid.alive)
         bornTextBox.text = String(StandardEngine.sharedInstance.grid.born)
         diedTextBox.text = String(StandardEngine.sharedInstance.grid.died)

@@ -88,7 +88,9 @@ class StandardEngine: EngineProtocol {
     weak var delegate: EngineDelegate?
     
     var refreshRate:  Double = 0.0
-    var refreshTimer: NSTimer?
+    var refreshTimer: Timer?
+    var genCount: Int = 0
+    
     
     subscript (i:Int, j:Int) -> CellState {
         get {
@@ -105,9 +107,11 @@ class StandardEngine: EngineProtocol {
         self.rows = rows
         self.cols = cols
         self.grid = Grid(rows,cols, cellInitializer: cellInitializer)
+        self.genCount = 0
     }
     
     func step() -> GridProtocol {
+        self.genCount += self.genCount
         var newGrid = Grid(self.rows, self.cols)
         newGrid.cells = grid.cells.map {
             switch grid.livingNeighbors($0.position) {

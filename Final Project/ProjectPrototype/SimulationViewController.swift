@@ -53,10 +53,10 @@ class SimulationViewController: UIViewController, EngineDelegate {
             for y in 0..<withGrid.rows {
                 //set rect for next cell
                 let cellRect:CGRect = CGRectMake((xDim * CGFloat(x)), (yDim * CGFloat(y)), xDim, yDim)
-                let cellState: CellState = withGrid(i:x, j:y)
+                let currentCellState:CellState = withGrid(x, y)
                 
                 // Function call to draw cell
-                gridViewGrid.drawCell(cellRect, cellState: CellState)
+                gridViewGrid.drawCell(cellRect, currentCellState: CellState)
             }
         }
     }
