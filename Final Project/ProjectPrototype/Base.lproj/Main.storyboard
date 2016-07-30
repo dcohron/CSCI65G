@@ -115,6 +115,9 @@
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Simulation" image="Simulation" id="cPa-gy-q4n"/>
+                    <connections>
+                        <outlet property="gridView" destination="4Bj-RX-Vou" id="ic2-FL-L9J"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Nw-L8-lE0" sceneMemberID="firstResponder"/>
             </objects>
@@ -276,7 +279,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Generation Data" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="erW-Qe-yk3">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Generation Data" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="erW-Qe-yk3">
                                 <rect key="frame" x="238" y="169" width="125" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="125" id="06Z-ZK-q4k"/>
@@ -292,6 +295,7 @@
                             <constraint firstItem="0b4-Cz-gMH" firstAttribute="centerY" secondItem="aF8-Ev-8KT" secondAttribute="centerY" id="0aO-pt-aGx"/>
                             <constraint firstItem="nDo-RX-dUS" firstAttribute="centerX" secondItem="aF8-Ev-8KT" secondAttribute="centerX" id="2Tj-0U-SIW"/>
                             <constraint firstItem="94x-lC-7rf" firstAttribute="top" secondItem="nDo-RX-dUS" secondAttribute="bottom" constant="8" id="6ES-aF-QEQ"/>
+                            <constraint firstItem="erW-Qe-yk3" firstAttribute="centerX" secondItem="aF8-Ev-8KT" secondAttribute="centerX" id="Bpf-I4-cd5"/>
                             <constraint firstItem="0b4-Cz-gMH" firstAttribute="centerX" secondItem="aF8-Ev-8KT" secondAttribute="centerX" id="GZE-Yz-bBl"/>
                             <constraint firstItem="9KL-w0-Rdf" firstAttribute="centerX" secondItem="aF8-Ev-8KT" secondAttribute="centerX" id="PsF-AD-Vay"/>
                             <constraint firstItem="0b4-Cz-gMH" firstAttribute="width" secondItem="aF8-Ev-8KT" secondAttribute="width" id="TF0-gg-T6w"/>
@@ -300,6 +304,7 @@
                             <constraint firstItem="9KL-w0-Rdf" firstAttribute="height" secondItem="aF8-Ev-8KT" secondAttribute="height" id="fak-eV-UOH"/>
                             <constraint firstItem="P75-eU-JGy" firstAttribute="top" secondItem="nDo-RX-dUS" secondAttribute="bottom" constant="8" id="hDN-Mp-aiV"/>
                             <constraint firstItem="nDo-RX-dUS" firstAttribute="leading" secondItem="lBx-FW-VgT" secondAttribute="trailing" constant="20" id="jAA-rG-W20"/>
+                            <constraint firstItem="Xn5-fe-iuB" firstAttribute="top" secondItem="erW-Qe-yk3" secondAttribute="bottom" constant="19" id="jo6-jT-csN"/>
                             <constraint firstItem="9KL-w0-Rdf" firstAttribute="width" secondItem="aF8-Ev-8KT" secondAttribute="width" id="l4a-CY-QaS"/>
                             <constraint firstItem="nDo-RX-dUS" firstAttribute="top" secondItem="Xn5-fe-iuB" secondAttribute="bottom" constant="8" id="wFv-hE-ei5"/>
                         </constraints>
@@ -311,11 +316,11 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="Statistics" image="Statistics" id="KBB-GK-HgT"/>
                     <connections>
+                        <outlet property="aliveTextBox" destination="nDo-RX-dUS" id="ROF-la-zmT"/>
                         <outlet property="bornTextBox" destination="94x-lC-7rf" id="yq0-Yi-4du"/>
                         <outlet property="diedTextBox" destination="0Op-Pz-S0P" id="nZX-O6-rl6"/>
                         <outlet property="emptyTextBox" destination="UOy-JG-MvC" id="ce5-wP-FJZ"/>
                         <outlet property="generationBox" destination="Xn5-fe-iuB" id="zYP-cY-PsY"/>
-                        <outlet property="livingTextBox" destination="nDo-RX-dUS" id="WfV-yx-caV"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dvv-hQ-DqS" userLabel="First Responder" sceneMemberID="firstResponder"/>

@@ -57,7 +57,7 @@ protocol EngineProtocol {
     weak var delegate: EngineDelegate? { get set }
     
     var refreshRate:  Double { get set }
-    var refreshTimer: NSTimer? { get set }
+    var refreshTimer: Timer? { get set }
     
     func step() -> GridProtocol
 }

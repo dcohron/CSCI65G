@@ -10,15 +10,19 @@ import UIKit
 
 
 struct configData {
-    let title: String
+    var title: String
     let contents: Array<(Int, Int)>
     
-    static func fromJSON (json: AnyObject) -> configData {
+    static func fromJSON (json: AnyObject) -> configData! {
         if let dict = json as? Dictionary<String, AnyObject> {
             let title = dict["title"] as? String
-            let contents = dict["contents"] as? Array<(Int, Int)>
+            let contentArray = dict["contents"] as? Array<Array<Int>>
+            let contents = contentArray?.map({ intArray in
+                return (intArray[0],intArray[1])
+            })
             return configData(title: title!, contents: contents!)
         }
+        else { return nil }
     }
 }
 
@@ -29,7 +33,7 @@ class ViewController: UITableViewController {
     
 //    private var names = ["Van", "Nate", "JP"]
     
-    private var names:Array<String> = []
+    private var configDataArray:Array<configData> = []
     
 
     override func viewDidLoad() {
@@ -43,33 +47,18 @@ class ViewController: UITableViewController {
         
         let url = NSURL(string: "https://dl.dropboxusercontent.com/u/7544475/S65g.json")!
         
-        let array = [configData]()
-        
         let fetcher = Fetcher()
         fetcher.requestJSON(url) { (json, message) in
             if let json = json {
-                
-           
-//                    array = json as? [[String: AnyObject]] {
-//                        let titles: [(title: String, contents: [(Int, Int)])] = array.map { (array) -> (title: String, contents: [(Int, Int)]) in
-//                            return (title: array["title"]! as! String, contents: array["contents"]! as! [(Int, Int)])
-//                        }
-//                    }
-                
-                
                 let array: Array<configData> = (json as! Array<AnyObject>).map({ return configData.fromJSON($0)})
+                self.configDataArray = array
+                print(array)
             }
             
-            //  Need array of titles to feed names for tableView
-//            self.names = Array(arrayLiteral: self.title!)
-//            self.names = array.map({array: [[String:[(Int, Int)]]] -> String return $0(key)})
-            self.names = array.map({ $0(0)})
-            
-            print(array)
             let op = NSBlockOperation {
                 self.tableView.reloadData()
             }
-                NSOperationQueue.mainQueue().addOperation(op)
+            NSOperationQueue.mainQueue().addOperation(op)
         }
         
 //  2) Data for class example. Do one or the other as data is different structure
@@ -101,8 +90,9 @@ class ViewController: UITableViewController {
     }
     
     @IBAction func addName(sender: AnyObject) {
-        names.append("Add new name...")
-        let itemRow = names.count - 1
+        let newItem = configData (title: "newConfig", contents: [])
+        configDataArray.append(newItem)
+        let itemRow = configDataArray.count - 1
         let itemPath = NSIndexPath(forRow:itemRow, inSection: 0)
         tableView.insertRowsAtIndexPaths([itemPath], withRowAnimation: .Automatic)
     }
@@ -113,7 +103,7 @@ class ViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return names.count
+        return configDataArray.count
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -125,7 +115,7 @@ class ViewController: UITableViewController {
         guard let nameLabel = cell.textLabel else {
             preconditionFailure("wtf?")
         }
-        nameLabel.text = names[row]
+        nameLabel.text = configDataArray[row].title
         cell.tag = row
         return cell
     }
@@ -134,7 +124,7 @@ class ViewController: UITableViewController {
                             commitEditingStyle editingStyle: UITableViewCellEditingStyle,
                                                forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == .Delete {
-            names.removeAtIndex(indexPath.row)
+            configDataArray.removeAtIndex(indexPath.row)
             tableView.deleteRowsAtIndexPaths([indexPath],
                                              withRowAnimation: .Automatic)
         }
@@ -142,14 +132,14 @@ class ViewController: UITableViewController {
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         let editingRow = (sender as! UITableViewCell).tag
-        let editingString = names[editingRow]
+        let editingString = configDataArray[editingRow].title
         guard let editingVC = segue.destinationViewController as? EditViewController
             else {
                 preconditionFailure("Another wtf?")
             }
         editingVC.name = editingString
         editingVC.commit = {
-            self.names[editingRow] = $0
+            self.configDataArray[editingRow].title = $0
             let indexPath = NSIndexPath(forRow: editingRow, inSection: 0)
             self.tableView.reloadRowsAtIndexPaths([indexPath],
                 withRowAnimation: .Automatic)

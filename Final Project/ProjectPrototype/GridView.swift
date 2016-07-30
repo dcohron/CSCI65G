@@ -20,16 +20,36 @@ class GridView: UIView {
     
     override func drawRect(rect: CGRect) {
         super.drawRect(rect)
+        print("drawing rect")
+        
+        let grid = StandardEngine.sharedInstance.grid
+        var xDim: CGFloat {return self.frame.width/CGFloat(grid.cols)}
+        var yDim: CGFloat {return self.frame.height/CGFloat(grid.rows)}
+        
+        // Call for redraw of entire grid, one cell at a time
+        for x in 0..<grid.cols {
+            for y in 0..<grid.rows {
+                //set rect for next cell
+                let cellRect:CGRect = CGRectMake((xDim * CGFloat(x)), (yDim * CGFloat(y)), xDim, yDim)
+                let currentCellState:CellState = grid[(x, y)]
+                
+                // Function call to draw cell
+                self.drawCell(cellRect, cellState: currentCellState)
+            }
+        }
+
+        
     }
     
     func drawCell(rect: CGRect, cellState: CellState) -> (){
         var color = emptyColor
+        print("drawing cell")
         
         switch cellState {
-            case .Empty: return color = emptyColor
-            case .Died: return color = diedColor
-            case .Born: return color = bornColor
-            case .Alive: return color = aliveColor
+            case .Empty:  color = emptyColor
+            case .Died:  color = diedColor
+            case .Born:  color = bornColor
+            case .Alive:  color = aliveColor
         }
         color.setFill()
                 
