@@ -11,6 +11,7 @@
 import UIKit
 
 typealias Position = (row:Int, col: Int)
+typealias Cell = (position: Position, state: CellState)
 
 enum CellState {
     case Empty
@@ -25,8 +26,6 @@ enum CellState {
         }
     }
 }
-
-typealias Cell = (position: Position, state: CellState)
 
 protocol GridProtocol {
     var rows: Int { get }
@@ -89,7 +88,7 @@ class StandardEngine: EngineProtocol {
     
     var refreshRate:  Double = 0.0
     var refreshTimer: Timer?
-    var genCount: Int = 0
+    var genCount: Int = 1
     
     
     subscript (i:Int, j:Int) -> CellState {
@@ -112,6 +111,7 @@ class StandardEngine: EngineProtocol {
     
     func step() -> GridProtocol {
         self.genCount += self.genCount
+        print(self.genCount)
         var newGrid = Grid(self.rows, self.cols)
         newGrid.cells = grid.cells.map {
             switch grid.livingNeighbors($0.position) {

@@ -15,16 +15,21 @@ class GridView: UIView {
     @IBInspectable var emptyColor: UIColor = UIColor.whiteColor()
     @IBInspectable var diedColor: UIColor = UIColor.purpleColor()
     @IBInspectable var gridColor: UIColor = UIColor.yellowColor()
-    @IBInspectable var gridWidth: CGFloat = 1.0
+    @IBInspectable var gridWidth: CGFloat = 2.0
+    
+    var grid = StandardEngine.sharedInstance.grid
+    var xDim: CGFloat {return self.frame.width/CGFloat(grid.cols)}
+    var yDim: CGFloat {return self.frame.height/CGFloat(grid.rows)}
+
 
     
     override func drawRect(rect: CGRect) {
         super.drawRect(rect)
-        print("drawing rect")
         
-        let grid = StandardEngine.sharedInstance.grid
-        var xDim: CGFloat {return self.frame.width/CGFloat(grid.cols)}
-        var yDim: CGFloat {return self.frame.height/CGFloat(grid.rows)}
+//        let grid = StandardEngine.sharedInstance.grid
+        
+//        var xDim: CGFloat {return self.frame.width/CGFloat(grid.cols)}
+//        var yDim: CGFloat {return self.frame.height/CGFloat(grid.rows)}
         
         // Call for redraw of entire grid, one cell at a time
         for x in 0..<grid.cols {
@@ -37,13 +42,35 @@ class GridView: UIView {
                 self.drawCell(cellRect, cellState: currentCellState)
             }
         }
-
+    }
+    
+    //  Function to take an array of cells (x,y) and draw grid with only those cells
+    //  set to alive, all other cells set to empty
+    func drawPoints (configuration: configData, rect: CGRect) -> (){
         
+//        let maxElement = configuration.contents.reduce(configuration.contents[(0)]) {$0.0 < $0.1 ? $0.1 : $0.0}
+//        print(maxElement)
+        
+        
+        
+        
+//        pointGrid = configuration.contents.map() {return Cell.position = configuration.contents[0] ? $0.CellState = .Alive : $0.CellState = .Empty}
+        
+        // Check and fill grid with points
+        
+        for element in configuration.contents {
+            let position = element
+            let configCellState: CellState = .Alive
+            grid[(position)] = configCellState
+        }
+        
+        drawRect(rect)
+    //  Close func drawPoints
     }
     
     func drawCell(rect: CGRect, cellState: CellState) -> (){
         var color = emptyColor
-        print("drawing cell")
+        print("drawing cell \(cellState)")
         
         switch cellState {
             case .Empty:  color = emptyColor
@@ -98,8 +125,31 @@ class GridView: UIView {
         //draw the stroke
         outlinePath.stroke()
         
-        super.drawRect(rect)
+//        super.drawRect(rect)
         
+    }
+    
+    //  Implement touch editing functionality
+    
+    func getCellPosition(position: CGPoint) -> Position {
+        return Position(Int(position.y / bounds.height * CGFloat(grid.rows)), Int(position.x / bounds.height * CGFloat(grid.cols)))
+    }
+    
+    func toggle(state: CellState) -> CellState {
+        switch state {
+        case .Alive, .Born: return .Empty
+        default: return .Alive
+        }
+    }
+    
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        if let touch = touches.first{
+            let position = touch.locationInView(self)
+            let cell = getCellPosition(position)
+            grid[cell.row, cell.col] = toggle(grid[cell.row, cell.col])
+            let rect = CGRectMake(CGFloat(cell.col)*xDim, CGFloat(cell.row)*yDim, xDim-1, yDim-1)
+            setNeedsDisplayInRect(rect)
+        }
     }
 
 //  Close class definition of GridView

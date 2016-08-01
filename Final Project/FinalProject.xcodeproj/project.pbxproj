@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		01E011A11D4C3F3F00BB174A /* Timer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01E011A01D4C3F3F00BB174A /* Timer.swift */; };
+		01E011A31D4D747D00BB174A /* Fetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01E011A21D4D747D00BB174A /* Fetcher.swift */; };
 		FB97CDD51D441B610022CC4A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB97CDD41D441B610022CC4A /* AppDelegate.swift */; };
 		FB97CDD71D441B610022CC4A /* InstrumentationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB97CDD61D441B610022CC4A /* InstrumentationViewController.swift */; };
 		FB97CDD91D441B610022CC4A /* SimulationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB97CDD81D441B610022CC4A /* SimulationViewController.swift */; };
@@ -34,6 +35,7 @@
 
 /* Begin PBXFileReference section */
 		01E011A01D4C3F3F00BB174A /* Timer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Timer.swift; sourceTree = "<group>"; };
+		01E011A21D4D747D00BB174A /* Fetcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Fetcher.swift; sourceTree = "<group>"; };
 		FB97CDD11D441B610022CC4A /* FinalProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FinalProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FB97CDD41D441B610022CC4A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = AppDelegate.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		FB97CDD61D441B610022CC4A /* InstrumentationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstrumentationViewController.swift; sourceTree = "<group>"; };
@@ -96,6 +98,7 @@
 				FB97CDD61D441B610022CC4A /* InstrumentationViewController.swift */,
 				FB97CDD81D441B610022CC4A /* SimulationViewController.swift */,
 				FB97CDFA1D4439FF0022CC4A /* ConfigurationViewController.swift */,
+				01E011A21D4D747D00BB174A /* Fetcher.swift */,
 				FB97CDFC1D443A450022CC4A /* ConfigurationEditorViewController.swift */,
 				FB97CDFE1D443A8D0022CC4A /* GridView.swift */,
 				FB97CDF61D44249F0022CC4A /* Engine.swift */,
@@ -223,6 +226,7 @@
 				FB97CDD91D441B610022CC4A /* SimulationViewController.swift in Sources */,
 				FB97CDF91D4424C90022CC4A /* StatisticsViewController.swift in Sources */,
 				FB97CDFF1D443A8D0022CC4A /* GridView.swift in Sources */,
+				01E011A31D4D747D00BB174A /* Fetcher.swift in Sources */,
 				FB97CDF71D44249F0022CC4A /* Engine.swift in Sources */,
 				FB97CDFD1D443A450022CC4A /* ConfigurationEditorViewController.swift in Sources */,
 				FB97CDD51D441B610022CC4A /* AppDelegate.swift in Sources */,
