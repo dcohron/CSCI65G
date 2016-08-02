@@ -29,11 +29,12 @@ class StatisticsViewController: UIViewController {
     @IBOutlet weak var emptyTextBox: UITextField!
     
     
+    let engine = StandardEngine.sharedInstance
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        
     }
     
     override func didReceiveMemoryWarning() {
@@ -45,14 +46,12 @@ class StatisticsViewController: UIViewController {
         displayCounts()
     }
     
-    
-    
     func displayCounts() {
-        generationBox.text = String(StandardEngine.sharedInstance.genCount)
-        aliveTextBox.text = String(StandardEngine.sharedInstance.grid.alive)
-        bornTextBox.text = String(StandardEngine.sharedInstance.grid.born)
-        diedTextBox.text = String(StandardEngine.sharedInstance.grid.died)
-        emptyTextBox.text = String(StandardEngine.sharedInstance.grid.empty)
+        generationBox.text = String(engine.genCount)
+        aliveTextBox.text = String(engine.grid.alive)
+        bornTextBox.text = String(engine.grid.born)
+        diedTextBox.text = String(engine.grid.died)
+        emptyTextBox.text = String(engine.grid.empty)
     }
     
 }

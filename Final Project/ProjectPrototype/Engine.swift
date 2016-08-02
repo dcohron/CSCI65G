@@ -47,6 +47,14 @@ protocol GridProtocol {
 
 protocol  EngineDelegate: class {
     func engineDidUpdate(withGrid: GridProtocol)
+    func engineDidUpdate(withConfigurations: Array<configData>)
+}
+
+extension EngineDelegate {
+    func engineDidUpdate(withConfigurations: Array<configData>){
+        // empty default implementation
+        // way to make this function optional as required by protocol
+    }
 }
 
 protocol EngineProtocol {
@@ -65,8 +73,30 @@ typealias CellInitializer = (Position) -> CellState
 
 class StandardEngine: EngineProtocol {
     
-    static var _sharedInstance: StandardEngine = StandardEngine(20,20)
+    private static var _sharedInstance: StandardEngine = StandardEngine(20,20)
     static var sharedInstance: StandardEngine { get { return _sharedInstance } }
+    
+    var configDataArray:Array<configData> = []
+    
+    //  Grab configurations stored at url and read in via JSON
+    func loadConfigurations(urlString: String) {
+        let url = NSURL(string: urlString)!
+        let fetcher = Fetcher()
+        fetcher.requestJSON(url) { (json, message) in
+            if let json = json, array = json as? Array<Dictionary<String, AnyObject>> {
+                self.configDataArray = array.map({(dict) -> configData in
+                    return configData.fromJSON(dict)
+                })
+                print(self.configDataArray)
+    
+                let op = NSBlockOperation {
+                    if let delegate = self.delegate { delegate.engineDidUpdate(self.configDataArray)}
+                }
+                NSOperationQueue.mainQueue().addOperation(op)
+            }
+        }
+    }
+
     
     var grid: GridProtocol
 
@@ -110,7 +140,7 @@ class StandardEngine: EngineProtocol {
     }
     
     func step() -> GridProtocol {
-        self.genCount += self.genCount
+        self.genCount = self.genCount + 1
         print(self.genCount)
         var newGrid = Grid(self.rows, self.cols)
         newGrid.cells = grid.cells.map {

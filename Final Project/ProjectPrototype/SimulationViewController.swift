@@ -11,14 +11,15 @@ import UIKit
 
 class SimulationViewController: UIViewController, EngineDelegate {
     
+    let engine = StandardEngine.sharedInstance
+    
     let grid = StandardEngine.sharedInstance.grid
     
     @IBOutlet weak var gridView : GridView!
     
     //  Call engine and advance one generation
     @IBAction func stepButton(sender: AnyObject) {
-        StandardEngine.sharedInstance.step()
-        gridView.setNeedsDisplay()
+        engine.step()
     }
     
     //  Save current grid, prompt for name, save back to tableView
@@ -28,17 +29,17 @@ class SimulationViewController: UIViewController, EngineDelegate {
     //  Reset completely clears contents of grid (back to empty?)
     @IBAction func resetButton(sender: AnyObject) {
         let newGrid = Grid(grid.rows, grid.cols)
-        StandardEngine.sharedInstance.grid = newGrid
-        gridView.setNeedsDisplay()
+        engine.grid = newGrid
     }
-    
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        
-        StandardEngine.sharedInstance.delegate = self
-        
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+         engine.delegate = self
+        gridView.setNeedsDisplay()
     }
 
     override func didReceiveMemoryWarning() {

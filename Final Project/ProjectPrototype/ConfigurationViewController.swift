@@ -8,57 +8,57 @@
 
 import UIKit
 
+
+//  JSON is made up of Array, Dictionary, Boolean, Integer, Double/Float, String
 struct configData {
     var title: String
-    let contents: Array<(Int, Int)>
+    let positions: Array<Position>
     
-    static func fromJSON (json: AnyObject) -> configData! {
-        if let dict = json as? Dictionary<String, AnyObject> {
-            let title = dict["title"] as? String
-            let contentArray = dict["contents"] as? Array<Array<Int>>
-            let contents = contentArray?.map({ intArray in
-                return (intArray[0],intArray[1])
-            })
-            return configData(title: title!, contents: contents!)
-        }
-        else { return nil }
+    static func fromJSON (json: Dictionary<String, AnyObject>) -> configData {
+        let title = json["title"] as! String
+        let contents = json["contents"] as! Array<Array<Int>>
+        let positions = contents.map({ (intArray) -> Position in
+            return Position(intArray.first!,intArray.last!)
+        })
+        return configData(title: title, positions: positions)
     }
 }
 
 
-class ConfigurationViewController: UITableViewController {
+class ConfigurationViewController: UITableViewController, EngineDelegate {
     
-    private var configDataArray:Array<configData> = []
+//    private var configDataArray:Array<configData> = []
+    
+    let engine = StandardEngine.sharedInstance
+    
+    private var configurations:Array<configData> {
+        get {
+            return engine.configDataArray
+        }
+        set {
+            engine.configDataArray = newValue
+        }
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
         // Do any additional setup after loading the view.
+        engine.loadConfigurations("https://dl.dropboxusercontent.com/u/7544475/S65g.json")
     }
     
     
     override func viewDidAppear(animated: Bool) {
-        
-        //  Grab configurations stored at url and read in via JSON
-        let url = NSURL(string: "https://dl.dropboxusercontent.com/u/7544475/S65g.json")!
-        
-        let fetcher = Fetcher()
-        fetcher.requestJSON(url) { (json, message) in
-            if let json = json {
-                let array: Array<configData> = (json as! Array<AnyObject>).map({ return configData.fromJSON($0)})
-                self.configDataArray = array
-                print(array)
-            }
-            
-            let op = NSBlockOperation {
-                self.tableView.reloadData()
-            }
-            NSOperationQueue.mainQueue().addOperation(op)
-        }
-        
+        super.viewDidAppear(animated)
+        engine.delegate = self
     }
 
+    func engineDidUpdate(withGrid: GridProtocol) {
+        // do nothing
+    }
     
+    func engineDidUpdate(withConfigurations: Array<configData>) {
+        tableView.reloadData()
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -67,20 +67,15 @@ class ConfigurationViewController: UITableViewController {
     
     
     @IBAction func addName(sender: AnyObject) {
-        let newItem = configData (title: "newConfig", contents: [])
-        configDataArray.append(newItem)
-        let itemRow = configDataArray.count - 1
+        let newItem = configData (title: "newConfig", positions: [])
+        configurations.append(newItem)
+        let itemRow = configurations.count - 1
         let itemPath = NSIndexPath(forRow:itemRow, inSection: 0)
         tableView.insertRowsAtIndexPaths([itemPath], withRowAnimation: .Automatic)
     }
     
-    //MARK: UITableViewDelegation
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 1
-    }
-    
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return configDataArray.count
+        return configurations.count
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -92,7 +87,7 @@ class ConfigurationViewController: UITableViewController {
         guard let nameLabel = cell.textLabel else {
             preconditionFailure("wtf?")
         }
-        nameLabel.text = configDataArray[row].title
+        nameLabel.text = configurations[row].title
         cell.tag = row
         return cell
     }
@@ -101,7 +96,7 @@ class ConfigurationViewController: UITableViewController {
                             commitEditingStyle editingStyle: UITableViewCellEditingStyle,
                                                forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == .Delete {
-            configDataArray.removeAtIndex(indexPath.row)
+            configurations.removeAtIndex(indexPath.row)
             tableView.deleteRowsAtIndexPaths([indexPath],
                                              withRowAnimation: .Automatic)
         }
@@ -109,14 +104,14 @@ class ConfigurationViewController: UITableViewController {
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         let editingRow = (sender as! UITableViewCell).tag
-        let editingString = configDataArray[editingRow].title
+        let editingString = configurations[editingRow].title
         guard let editingVC = segue.destinationViewController as? ConfigurationEditorViewController
             else {
                 preconditionFailure("Another wtf?")
         }
-        editingVC.name = editingString
+        editingVC.configuration = configurations[editingRow]
         editingVC.commit = {
-            self.configDataArray[editingRow].title = $0
+            self.configurations[editingRow].title = $0
             let indexPath = NSIndexPath(forRow: editingRow, inSection: 0)
             self.tableView.reloadRowsAtIndexPaths([indexPath],
                                                   withRowAnimation: .Automatic)

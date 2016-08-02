@@ -17,26 +17,65 @@ class GridView: UIView {
     @IBInspectable var gridColor: UIColor = UIColor.yellowColor()
     @IBInspectable var gridWidth: CGFloat = 2.0
     
-    var grid = StandardEngine.sharedInstance.grid
-    var xDim: CGFloat {return self.frame.width/CGFloat(grid.cols)}
-    var yDim: CGFloat {return self.frame.height/CGFloat(grid.rows)}
-
-
+    let engine = StandardEngine.sharedInstance
     
+    var xDim: CGFloat {return self.frame.width/CGFloat(engine.grid.cols)}
+    var yDim: CGFloat {return self.frame.height/CGFloat(engine.grid.rows)}
+    
+    var points: [Position] {
+        set {
+            let maxRow = newValue.map{$0.row}.maxElement()
+            let maxCol = newValue.map{$0.col}.maxElement()
+            
+            var size: Int = 20
+            
+            if let maxRow = maxRow, maxCol = maxCol {
+                size = (max(maxRow, maxCol)+1)
+                if size > 100 {
+                    size = 100
+                }
+            }
+            let newGrid = Grid(size, size) {position in
+                return newValue.contains({return position.row == $0.row && position.col == $0.col}) ? .Alive : .Empty
+            }
+    
+            StandardEngine.sharedInstance.grid = newGrid
+            
+            if let delegate = StandardEngine.sharedInstance.delegate {
+                delegate.engineDidUpdate(StandardEngine.sharedInstance.grid)
+            }
+        }
+    
+        get {
+            return StandardEngine.sharedInstance.grid.cells.reduce([]) { (array, cell) -> [Position] in
+                if cell.state == .Alive {
+                    return array + [cell.position]
+                }
+                return array
+            }
+//            return livingArray
+        }
+    }
+
+// Needs completion
+//    func updateGridBasedOnConfiguration() {
+//        if let configuration = configuration {
+//            let newGrid = Grid(rows, cols) { positions in
+//                
+//        }
+//    }
+
+
+
     override func drawRect(rect: CGRect) {
         super.drawRect(rect)
         
-//        let grid = StandardEngine.sharedInstance.grid
-        
-//        var xDim: CGFloat {return self.frame.width/CGFloat(grid.cols)}
-//        var yDim: CGFloat {return self.frame.height/CGFloat(grid.rows)}
-        
         // Call for redraw of entire grid, one cell at a time
-        for x in 0..<grid.cols {
-            for y in 0..<grid.rows {
+        for x in 0..<engine.grid.cols {
+            for y in 0..<engine.grid.rows {
                 //set rect for next cell
                 let cellRect:CGRect = CGRectMake((xDim * CGFloat(x)), (yDim * CGFloat(y)), xDim, yDim)
-                let currentCellState:CellState = grid[(x, y)]
+                let currentCellState:CellState = engine.grid[(x, y)]
                 
                 // Function call to draw cell
                 self.drawCell(cellRect, cellState: currentCellState)
@@ -46,27 +85,27 @@ class GridView: UIView {
     
     //  Function to take an array of cells (x,y) and draw grid with only those cells
     //  set to alive, all other cells set to empty
-    func drawPoints (configuration: configData, rect: CGRect) -> (){
-        
-//        let maxElement = configuration.contents.reduce(configuration.contents[(0)]) {$0.0 < $0.1 ? $0.1 : $0.0}
-//        print(maxElement)
-        
-        
-        
-        
-//        pointGrid = configuration.contents.map() {return Cell.position = configuration.contents[0] ? $0.CellState = .Alive : $0.CellState = .Empty}
-        
-        // Check and fill grid with points
-        
-        for element in configuration.contents {
-            let position = element
-            let configCellState: CellState = .Alive
-            grid[(position)] = configCellState
-        }
-        
-        drawRect(rect)
-    //  Close func drawPoints
-    }
+//    func drawPoints (configuration: configData, rect: CGRect) -> (){
+//        
+////        let maxElement = configuration.contents.reduce(configuration.contents[(0)]) {$0.0 < $0.1 ? $0.1 : $0.0}
+////        print(maxElement)
+//        
+//        
+//        
+//        
+////        pointGrid = configuration.contents.map() {return Cell.position = configuration.contents[0] ? $0.CellState = .Alive : $0.CellState = .Empty}
+//        
+//        // Check and fill grid with points
+//        
+//        for element in configuration.positions {
+//            let position = element
+//            let configCellState: CellState = .Alive
+//            grid[(position)] = configCellState
+//        }
+//        
+//        drawRect(rect)
+//    //  Close func drawPoints
+//    }
     
     func drawCell(rect: CGRect, cellState: CellState) -> (){
         var color = emptyColor
@@ -132,7 +171,7 @@ class GridView: UIView {
     //  Implement touch editing functionality
     
     func getCellPosition(position: CGPoint) -> Position {
-        return Position(Int(position.y / bounds.height * CGFloat(grid.rows)), Int(position.x / bounds.height * CGFloat(grid.cols)))
+        return Position(Int(position.y / bounds.height * CGFloat(engine.grid.rows)), Int(position.x / bounds.height * CGFloat(engine.grid.cols)))
     }
     
     func toggle(state: CellState) -> CellState {
@@ -146,7 +185,7 @@ class GridView: UIView {
         if let touch = touches.first{
             let position = touch.locationInView(self)
             let cell = getCellPosition(position)
-            grid[cell.row, cell.col] = toggle(grid[cell.row, cell.col])
+            engine.grid[cell.row, cell.col] = toggle(engine.grid[cell.row, cell.col])
             let rect = CGRectMake(CGFloat(cell.col)*xDim, CGFloat(cell.row)*yDim, xDim-1, yDim-1)
             setNeedsDisplayInRect(rect)
         }
