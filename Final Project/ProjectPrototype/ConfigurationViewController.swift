@@ -49,6 +49,11 @@ class ConfigurationViewController: UITableViewController, EngineDelegate {
         engine.loadConfigurations("https://dl.dropboxusercontent.com/u/7544475/S65g.json")
     }
     
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        tableView.reloadData()
+    }
+    
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)

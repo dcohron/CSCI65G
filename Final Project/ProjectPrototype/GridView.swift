@@ -12,13 +12,13 @@ import UIKit
     
     // default cell colours
     @IBInspectable var livingColor: UIColor = UIColor.cyanColor()
-    @IBInspectable var emptyColor: UIColor = UIColor.yellowColor()
+    @IBInspectable var emptyColor: UIColor = UIColor.blackColor()
     @IBInspectable var bornColor: UIColor = UIColor.blueColor()
     @IBInspectable var diedColor: UIColor = UIColor.purpleColor()
 //    @IBInspectable var diseasedColor: UIColor = UIColor.redColor()
     
     // colour and width of grid lines
-    @IBInspectable var gridColor: UIColor = UIColor.blackColor()
+    @IBInspectable var gridColor: UIColor = UIColor.yellowColor()
     @IBInspectable var gridWidth: CGFloat = 2.0
     
     let engine = StandardEngine.sharedInstance

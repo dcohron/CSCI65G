@@ -22,13 +22,9 @@ class SimulationViewController: UIViewController, EngineDelegate {
     
     //  Save current grid, prompt for name, save back to tableView
     @IBAction func saveButton(sender: AnyObject) {
-        
-        let op = NSBlockOperation {
-            let configName = self.nameAlert()
-            print("Name in func saveButton is \(configName)")
-            self.engine.addConfigurationBasedOnGrid(configName)
-        }
-        NSOperationQueue.mainQueue().addOperation(op)
+        let configName = self.nameAlert()
+        print("Name in func saveButton is \(configName)")
+
     }
     
     //  Reset completely clears contents of grid (back to empty?)
@@ -37,6 +33,7 @@ class SimulationViewController: UIViewController, EngineDelegate {
         engine.grid = newGrid
         engine.genCount = 0
         print("Reset")
+        gridView.setNeedsDisplay()
     }
 
     override func viewDidLoad() {
@@ -58,7 +55,6 @@ class SimulationViewController: UIViewController, EngineDelegate {
         }
     }
 
-
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -75,7 +71,7 @@ class SimulationViewController: UIViewController, EngineDelegate {
         var configName: String = ""
         
         let alert = UIAlertController(title: "Save",
-                                      message: "Please enter configuration name.",
+                                      message: "Please enter configuration name",
                                       preferredStyle: UIAlertControllerStyle.Alert)
         
         let ok = UIAlertAction(title: "OK",
@@ -86,6 +82,7 @@ class SimulationViewController: UIViewController, EngineDelegate {
                                     print("And the config name is... \(alertTextField.text!)!")
                                     configName = alertTextField.text!
                                     print("Configuration name is ...\(configName)")
+                                    self.engine.addConfigurationBasedOnGrid(configName)
                                 }
         }
         
@@ -93,19 +90,15 @@ class SimulationViewController: UIViewController, EngineDelegate {
                                    style: UIAlertActionStyle.Cancel,
                                    handler: nil)
 
-        // Put on first thread to run
-        let op = NSBlockOperation {
-            alert.addTextFieldWithConfigurationHandler { (textField: UITextField) in
-                textField.placeholder = "Name here"
-            }
-        
-            alert.addAction(ok)
-            alert.addAction(cancel)
-        
-            self.presentViewController(alert, animated: true, completion: nil)
-            print("Bottom of alert name is \(configName)")
+        alert.addTextFieldWithConfigurationHandler { (textField: UITextField) in
+            textField.placeholder = "Name here"
         }
-        NSOperationQueue.mainQueue().addOperation(op)
+        
+        alert.addAction(ok)
+        alert.addAction(cancel)
+        
+        self.presentViewController(alert, animated: true, completion: nil)
+        print("Bottom of alert name is \(configName)")
         return configName
     }
 
