@@ -125,18 +125,21 @@ class StandardEngine: EngineProtocol {
         }
     }
     
-    // add to configuration editor save button
+    // Called from Configuration Editor save button
     func updateGridBasedOnConfiguration() {
         if let configuration = configuration {
             let newGrid = Grid(rows, cols) { position in
                 return configuration.positions.contains({ return position.row == $0.row && position.col == $0.col }) ? .Alive : .Empty
             }
             grid = newGrid
+            genCount = 0
         }
     }
     
-    // simulation view save button
+    // Called from Simulation view save button
     func addConfigurationBasedOnGrid(name: String) {
+        let configName = name
+        print(configName)
         var positions = Array<Position>()
         positions = grid.cells.reduce([]) { (array, cell) -> Array<Position> in
             if cell.state.isLiving() {
@@ -146,7 +149,8 @@ class StandardEngine: EngineProtocol {
                 return array
             }
         }
-        configurations.append(Configuration(title: name, positions: positions))
+        print(configName)
+        configurations.append(Configuration(title: configName, positions: positions))
     }
     
     

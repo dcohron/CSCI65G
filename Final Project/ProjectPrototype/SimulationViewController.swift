@@ -22,14 +22,15 @@ class SimulationViewController: UIViewController, EngineDelegate {
     
     //  Save current grid, prompt for name, save back to tableView
     @IBAction func saveButton(sender: AnyObject) {
-        nameAlert()
-//        addConfigurationBasedOnGrid(name: nameOfNewConfiguration)
+        let configName = nameAlert()
+        engine.addConfigurationBasedOnGrid(configName)
     }
     
     //  Reset completely clears contents of grid (back to empty?)
     @IBAction func resetButton(sender: AnyObject) {
         let newGrid = Grid(engine.grid.rows, engine.grid.cols)
         engine.grid = newGrid
+        engine.genCount = 0
         print("Reset")
     }
 
@@ -65,24 +66,35 @@ class SimulationViewController: UIViewController, EngineDelegate {
     
     func nameAlert() -> String {
         var configName: String = ""
+        
         let alert = UIAlertController(title: "Save",
-                                      message:"Please enter a name",
-                                      preferredStyle: .Alert)
-        let cancel = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel, handler: nil)
-        alert.addAction(cancel)
+                                      message: "Please enter configuration name.",
+                                      preferredStyle: UIAlertControllerStyle.Alert)
         
-        let ok = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: {(action) -> Void in
-            if let inputField: UITextField = alert.textFields!.first as! UITextField {
-                configName = inputField.text!
-            }
-        })
-        alert.addAction(ok)
-        
-        alert.addTextFieldWithConfigurationHandler { (nameInput) in
-            nameInput.placeholder = "Configuration name"
+        let ok = UIAlertAction(title: "OK",
+                               style: UIAlertActionStyle.Default) { (action: UIAlertAction) in
+                                
+                                if let alertTextField = alert.textFields?.first where alertTextField.text != nil {
+                                    
+                                    print("And the config name is... \(alertTextField.text!)!")
+                                    configName = alertTextField.text!
+                                }
         }
         
-        self.presentViewController(alert, animated: true){}
+        let cancel = UIAlertAction(title: "Cancel",
+                                   style: UIAlertActionStyle.Cancel,
+                                   handler: nil)
+        
+        alert.addTextFieldWithConfigurationHandler { (textField: UITextField) in
+            
+            textField.placeholder = "Name here"
+            
+        }
+        
+        alert.addAction(ok)
+        alert.addAction(cancel)
+        
+        self.presentViewController(alert, animated: true, completion: nil)
         return configName
     }
 

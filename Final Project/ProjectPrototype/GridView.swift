@@ -11,10 +11,10 @@ import UIKit
 @IBDesignable class GridView: UIView {
     
     // default cell colours
-    @IBInspectable var livingColor: UIColor = UIColor.yellowColor()
-    @IBInspectable var emptyColor: UIColor = UIColor.clearColor()  // UIColor.grayColor()
-    @IBInspectable var bornColor: UIColor = UIColor.greenColor()
-    @IBInspectable var diedColor: UIColor = UIColor.brownColor()
+    @IBInspectable var livingColor: UIColor = UIColor.cyanColor()
+    @IBInspectable var emptyColor: UIColor = UIColor.whiteColor()
+    @IBInspectable var bornColor: UIColor = UIColor.blueColor()
+    @IBInspectable var diedColor: UIColor = UIColor.purpleColor()
 //    @IBInspectable var diseasedColor: UIColor = UIColor.redColor()
     
     // colour and width of grid lines

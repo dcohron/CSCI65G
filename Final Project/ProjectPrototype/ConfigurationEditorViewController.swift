@@ -24,9 +24,10 @@ class ConfigurationEditorViewController: UIViewController, EngineDelegate {
             else { return }
         commit(newText)
         navigationController!.popViewControllerAnimated(true)
+        self.nameTextField.resignFirstResponder()
     }
     
-    @IBAction func runConfiguration(sender: AnyObject) {
+    @IBAction func loadConfigurationToSimulation(sender: AnyObject) {
         engine.updateGridBasedOnConfiguration()
     }
     
