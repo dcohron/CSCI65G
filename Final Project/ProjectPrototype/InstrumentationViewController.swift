@@ -45,7 +45,7 @@ class InstrumentationViewController: UIViewController {
     //  Accept input from refresh slider
     //  Notify Standard Engine that the refresh rate has changed
     @IBAction func refreshSlider(sender: UISlider) {
-        engine.refreshRate = Double(sender.value)
+        engine.refreshRate = Double(1/(sender.value))
         print(engine.refreshRate)
     }
     

@@ -13,8 +13,6 @@ class SimulationViewController: UIViewController, EngineDelegate {
     
     let engine = StandardEngine.sharedInstance
     
-//    let grid = StandardEngine.sharedInstance.grid
-    
     @IBOutlet weak var gridView : GridView!
     
     //  Call engine and advance one generation
@@ -24,6 +22,8 @@ class SimulationViewController: UIViewController, EngineDelegate {
     
     //  Save current grid, prompt for name, save back to tableView
     @IBAction func saveButton(sender: AnyObject) {
+        nameAlert()
+//        addConfigurationBasedOnGrid(name: nameOfNewConfiguration)
     }
     
     //  Reset completely clears contents of grid (back to empty?)
@@ -62,6 +62,30 @@ class SimulationViewController: UIViewController, EngineDelegate {
     func engineDidUpdate(withGrid: GridProtocol) {
         gridView.setNeedsDisplay()
     }
+    
+    func nameAlert() -> String {
+        var configName: String = ""
+        let alert = UIAlertController(title: "Save",
+                                      message:"Please enter a name",
+                                      preferredStyle: .Alert)
+        let cancel = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel, handler: nil)
+        alert.addAction(cancel)
+        
+        let ok = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: {(action) -> Void in
+            if let inputField: UITextField = alert.textFields!.first as! UITextField {
+                configName = inputField.text!
+            }
+        })
+        alert.addAction(ok)
+        
+        alert.addTextFieldWithConfigurationHandler { (nameInput) in
+            nameInput.placeholder = "Configuration name"
+        }
+        
+        self.presentViewController(alert, animated: true){}
+        return configName
+    }
+
     
 // Close the SimulationViewController class definition
 }

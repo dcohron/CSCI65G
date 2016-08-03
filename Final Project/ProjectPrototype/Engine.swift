@@ -114,28 +114,41 @@ class StandardEngine: EngineProtocol {
         let fetcher = Fetcher()
         fetcher.requestJSON(url) { (json, message) in
             if let json = json, array = json as? Array<Dictionary<String,AnyObject>> {
-                
-                self.configurations = array.map({ (dict) -> Configuration in
-                    return Configuration.fromJSON(dict)
-                })
-                print(self.configurations)
                 let op = NSBlockOperation {
-                    if let delegate = self.delegate { delegate.engineDidUpdate(self.configurations) }
+                    self.configurations = array.map({ (dict) -> Configuration in
+                        return Configuration.fromJSON(dict)
+                    })
+                    
                 }
                 NSOperationQueue.mainQueue().addOperation(op)
             }
         }
     }
     
+    // add to configuration editor save button
     func updateGridBasedOnConfiguration() {
         if let configuration = configuration {
             let newGrid = Grid(rows, cols) { position in
                 return configuration.positions.contains({ return position.row == $0.row && position.col == $0.col }) ? .Alive : .Empty
             }
-            
             grid = newGrid
         }
     }
+    
+    // simulation view save button
+    func addConfigurationBasedOnGrid(name: String) {
+        var positions = Array<Position>()
+        positions = grid.cells.reduce([]) { (array, cell) -> Array<Position> in
+            if cell.state.isLiving() {
+                return array + [cell.position]
+            }
+            else {
+                return array
+            }
+        }
+        configurations.append(Configuration(title: name, positions: positions))
+    }
+    
     
     
     var grid: GridProtocol

@@ -72,9 +72,6 @@ class ConfigurationViewController: UITableViewController, EngineDelegate {
     
     @IBAction func addConfiguration(sender: AnyObject) {
         configurations.append(Configuration(title: "Add new name...", positions: []))
-        let itemRow = configurations.count - 1
-        let itemPath = NSIndexPath(forRow:itemRow, inSection: 0)
-        tableView.insertRowsAtIndexPaths([itemPath], withRowAnimation: .Automatic)
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -106,7 +103,7 @@ class ConfigurationViewController: UITableViewController, EngineDelegate {
         let editingRow = (sender as! UITableViewCell).tag
         guard let editingVC = segue.destinationViewController as? ConfigurationEditorViewController else { preconditionFailure("Another wtf?") }
         
-//        engine.configurationIndex = editingRow
+        engine.configurationIndex = editingRow
         print(configurations[editingRow].title)
         editingVC.configuration = configurations[editingRow]
         editingVC.commit = {

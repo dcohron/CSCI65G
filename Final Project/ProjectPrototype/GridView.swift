@@ -27,14 +27,17 @@ import UIKit
     
     func calculateSize() -> Int {
         if let configuration = engine.configuration {
-            let maxRow = configuration.positions.map { $0.row }.maxElement()!
-            let maxCol = configuration.positions.map { $0.col }.maxElement()!
+            let maxRow = configuration.positions.map { $0.row }.maxElement() ?? 19
+            let maxCol = configuration.positions.map { $0.col }.maxElement() ?? 19
             
             var size: Int = 20 // default is 20 by 20
             
             size = max(maxRow, maxCol) + 1    // give it a margin of space
             if size > 100 {
                 size = 100   // we will limit it at 100 by 100
+            }
+            if size < 20 {
+                size = 20
             }
             
             return size

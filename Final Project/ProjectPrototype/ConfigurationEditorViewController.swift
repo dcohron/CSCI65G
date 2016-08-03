@@ -26,18 +26,23 @@ class ConfigurationEditorViewController: UIViewController, EngineDelegate {
         navigationController!.popViewControllerAnimated(true)
     }
     
+    @IBAction func runConfiguration(sender: AnyObject) {
+        engine.updateGridBasedOnConfiguration()
+    }
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // Do any additional setup after loading the view.
-//        nameTextField.text = configuration?.title
+        nameTextField.text = configuration?.title
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         engine.delegate = self
-//        editGridView.points = configuration!.positions
-//        editGridView.setNeedsDisplay()
+        editGridView.points = configuration!.positions
+        editGridView.setNeedsDisplay()
     }
 
 
