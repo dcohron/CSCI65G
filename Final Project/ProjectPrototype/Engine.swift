@@ -125,7 +125,7 @@ class StandardEngine: EngineProtocol {
         }
     }
     
-    // Called from Configuration Editor save button
+    // Called from Configuration Editor Load button
     func updateGridBasedOnConfiguration() {
         if let configuration = configuration {
             let newGrid = Grid(rows, cols) { position in

@@ -607,7 +607,7 @@
                                         </constraints>
                                         <state key="normal" title="Load"/>
                                         <connections>
-                                            <action selector="runConfiguration:" destination="n4S-nb-Bcc" eventType="touchUpInside" id="tJL-Pd-4eo"/>
+                                            <action selector="loadConfigurationToSimulation:" destination="n4S-nb-Bcc" eventType="touchUpInside" id="vuR-nu-1cy"/>
                                         </connections>
                                     </button>
                                 </subviews>
