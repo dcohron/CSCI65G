@@ -139,7 +139,7 @@ class StandardEngine: EngineProtocol {
     // Called from Simulation view save button
     func addConfigurationBasedOnGrid(name: String) {
         let configName = name
-        print(configName)
+        print("Let the name be \(configName)")
         var positions = Array<Position>()
         positions = grid.cells.reduce([]) { (array, cell) -> Array<Position> in
             if cell.state.isLiving() {
@@ -149,7 +149,7 @@ class StandardEngine: EngineProtocol {
                 return array
             }
         }
-        print(configName)
+        print("The name is \(configName)")
         configurations.append(Configuration(title: configName, positions: positions))
     }
     

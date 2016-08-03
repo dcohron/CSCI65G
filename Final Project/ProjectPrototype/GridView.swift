@@ -12,7 +12,7 @@ import UIKit
     
     // default cell colours
     @IBInspectable var livingColor: UIColor = UIColor.cyanColor()
-    @IBInspectable var emptyColor: UIColor = UIColor.whiteColor()
+    @IBInspectable var emptyColor: UIColor = UIColor.yellowColor()
     @IBInspectable var bornColor: UIColor = UIColor.blueColor()
     @IBInspectable var diedColor: UIColor = UIColor.purpleColor()
 //    @IBInspectable var diseasedColor: UIColor = UIColor.redColor()

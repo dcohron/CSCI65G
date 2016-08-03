@@ -22,8 +22,19 @@ class SimulationViewController: UIViewController, EngineDelegate {
     
     //  Save current grid, prompt for name, save back to tableView
     @IBAction func saveButton(sender: AnyObject) {
-        let configName = nameAlert()
-        engine.addConfigurationBasedOnGrid(configName)
+        
+        let op = NSBlockOperation {
+            let configName = self.nameAlert()
+            print("Name in func saveButton is \(configName)")
+            self.engine.addConfigurationBasedOnGrid(configName)
+        }
+        NSOperationQueue.mainQueue().addOperation(op)
+        
+        
+        
+//        let configName = nameAlert()
+//        print("Name in func saveButton is \(configName)")
+//        engine.addConfigurationBasedOnGrid(configName)
     }
     
     //  Reset completely clears contents of grid (back to empty?)
@@ -78,6 +89,7 @@ class SimulationViewController: UIViewController, EngineDelegate {
                                     
                                     print("And the config name is... \(alertTextField.text!)!")
                                     configName = alertTextField.text!
+                                    print("Configuration name is ...\(configName)")
                                 }
         }
         
@@ -95,6 +107,7 @@ class SimulationViewController: UIViewController, EngineDelegate {
         alert.addAction(cancel)
         
         self.presentViewController(alert, animated: true, completion: nil)
+        print("Bottom of alert name is \(configName)")
         return configName
     }
 
