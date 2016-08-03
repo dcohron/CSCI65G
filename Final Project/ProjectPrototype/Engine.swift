@@ -7,7 +7,6 @@
 //
 
 
-
 import UIKit
 
 typealias Position = (row:Int, col: Int)

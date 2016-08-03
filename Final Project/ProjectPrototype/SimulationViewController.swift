@@ -24,7 +24,6 @@ class SimulationViewController: UIViewController, EngineDelegate {
     @IBAction func saveButton(sender: AnyObject) {
         let configName = self.nameAlert()
         print("Name in func saveButton is \(configName)")
-
     }
     
     //  Reset completely clears contents of grid (back to empty?)
@@ -101,7 +100,6 @@ class SimulationViewController: UIViewController, EngineDelegate {
         print("Bottom of alert name is \(configName)")
         return configName
     }
-
     
 // Close the SimulationViewController class definition
 }

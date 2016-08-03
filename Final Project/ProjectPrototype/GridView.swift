@@ -15,7 +15,6 @@ import UIKit
     @IBInspectable var emptyColor: UIColor = UIColor.blackColor()
     @IBInspectable var bornColor: UIColor = UIColor.blueColor()
     @IBInspectable var diedColor: UIColor = UIColor.purpleColor()
-//    @IBInspectable var diseasedColor: UIColor = UIColor.redColor()
     
     // colour and width of grid lines
     @IBInspectable var gridColor: UIColor = UIColor.yellowColor()
@@ -188,19 +187,16 @@ import UIKit
     }
     
     func processTouch(touch: UITouch) {
-        // calculate cell size. This allows for non-square cells.
-        // If they must be squares, they can both equal the minimum of the two.
+        // Calculate cell size. This allows for non-square cells.
         let cellWidth: CGFloat = self.frame.size.width / CGFloat(cols)
         let cellHeight: CGFloat = self.frame.size.height / CGFloat (rows)
         
-        // find touched row and col
+        // Calulate row and col indicated
         let point: CGPoint = touch.locationInView(self)
         let touchRow = Int (floor(point.y / cellHeight))
         let touchCol  = Int (floor(point.x / cellWidth))
         
         // Only toggle if it is a valid cell location.
-        // This avoids a crash when the user's touch begins in the grid, and moves outside,
-        // a very possible accident.
         // A touch that begins outside the grid is invalid and will get no response,
         // even if it then moves inside.
         if touchRow >= 0 && touchRow < rows && touchCol >= 0 && touchCol < cols {
@@ -208,10 +204,9 @@ import UIKit
             var newGrid: GridProtocol = grid
             newGrid[touchRow,touchCol] = newGrid[touchRow,touchCol].toggle(newGrid[touchRow,touchCol])
             
-            // set grid = newGrid
             grid = newGrid
             
-            // send EngineUpdate notification
+            // Let delegate know grid has updated
             if let delegate = StandardEngine.sharedInstance.delegate {
                 delegate.engineDidUpdate(grid)
             }

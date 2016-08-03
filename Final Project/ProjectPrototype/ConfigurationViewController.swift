@@ -30,7 +30,6 @@ struct Configuration {
 
 class ConfigurationViewController: UITableViewController, EngineDelegate {
     
-    
     let engine = StandardEngine.sharedInstance
     
     private var configurations:Array<Configuration> {

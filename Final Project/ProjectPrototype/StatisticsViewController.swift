@@ -7,13 +7,6 @@
 //
 
 
-
-// Would like to add text field to show counter for generations run on this grid
-
-//  Should statistics change as timer causes to advance grid, or just static on load?
-
-
-
 import UIKit
 
 class StatisticsViewController: UIViewController {

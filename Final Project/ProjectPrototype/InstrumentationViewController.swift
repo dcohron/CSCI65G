@@ -67,6 +67,6 @@ class InstrumentationViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
-
+// Close Instrumentation View Controller class
 }
 
