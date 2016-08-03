@@ -13,7 +13,7 @@ class SimulationViewController: UIViewController, EngineDelegate {
     
     let engine = StandardEngine.sharedInstance
     
-    let grid = StandardEngine.sharedInstance.grid
+//    let grid = StandardEngine.sharedInstance.grid
     
     @IBOutlet weak var gridView : GridView!
     
@@ -28,8 +28,9 @@ class SimulationViewController: UIViewController, EngineDelegate {
     
     //  Reset completely clears contents of grid (back to empty?)
     @IBAction func resetButton(sender: AnyObject) {
-        let newGrid = Grid(grid.rows, grid.cols)
+        let newGrid = Grid(engine.grid.rows, engine.grid.cols)
         engine.grid = newGrid
+        print("Reset")
     }
 
     override func viewDidLoad() {
@@ -38,9 +39,19 @@ class SimulationViewController: UIViewController, EngineDelegate {
     }
     
     override func viewDidAppear(animated: Bool) {
-         engine.delegate = self
+        engine.delegate = self
         gridView.setNeedsDisplay()
+        if engine.timerOn == true {
+            engine.startTimer()
+        }
     }
+    
+    override func viewWillDisappear(animated: Bool) {
+        if engine.timerOn == true {
+            engine.cancelTimer()
+        }
+    }
+
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

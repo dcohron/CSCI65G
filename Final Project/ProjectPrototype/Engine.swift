@@ -11,7 +11,6 @@
 import UIKit
 
 typealias Position = (row:Int, col: Int)
-typealias Cell = (position: Position, state: CellState)
 
 enum CellState {
     case Empty
@@ -25,7 +24,18 @@ enum CellState {
         case .Died, .Empty: return false
         }
     }
+    
+    func toggle(value:CellState) -> CellState {
+        switch value {
+        case .Empty, .Died:
+            return .Alive
+        case .Alive, .Born:
+            return .Empty
+        }
+    }
 }
+
+typealias Cell = (position: Position, state: CellState)
 
 protocol GridProtocol {
     var rows: Int { get }
@@ -40,31 +50,30 @@ protocol GridProtocol {
     var empty:  Int { get }
     
     subscript (i:Int, j:Int) -> CellState { get set }
-
+    
     func neighbors(pos: Position) -> [Position]
     func livingNeighbors(position: Position) -> Int
 }
 
-protocol  EngineDelegate: class {
+protocol EngineDelegate: class {
     func engineDidUpdate(withGrid: GridProtocol)
-    func engineDidUpdate(withConfigurations: Array<configData>)
+    func engineDidUpdate(withConfigurations: Array<Configuration>)
 }
 
 extension EngineDelegate {
-    func engineDidUpdate(withConfigurations: Array<configData>){
+    func engineDidUpdate(withConfigurations: Array<Configuration>) {
         // empty default implementation
-        // way to make this function optional as required by protocol
     }
 }
 
 protocol EngineProtocol {
     var rows: Int { get set }
     var cols: Int { get set }
-    var grid: GridProtocol { get set }
+    var grid: GridProtocol { get }
     weak var delegate: EngineDelegate? { get set }
     
     var refreshRate:  Double { get set }
-    var refreshTimer: Timer? { get set }
+    var refreshTimer: NSTimer? { get set }
     
     func step() -> GridProtocol
 }
@@ -76,30 +85,61 @@ class StandardEngine: EngineProtocol {
     private static var _sharedInstance: StandardEngine = StandardEngine(20,20)
     static var sharedInstance: StandardEngine { get { return _sharedInstance } }
     
-    var configDataArray:Array<configData> = []
+    //  Generation count to count how many steps from original (seed) input grid
+    var genCount = 0
     
-    //  Grab configurations stored at url and read in via JSON
+    // Configurations Array (here because multiple views can add to it and read it)
+    var configurationIndex: Int?
+    var configuration: Configuration? {
+        get {
+            if delegate is ConfigurationEditorViewController {
+                return configurations[configurationIndex!]
+            }
+            return nil
+        }
+        set {
+            if delegate is ConfigurationEditorViewController {
+                configurations[configurationIndex!] = newValue!
+            }
+        }
+    }
+    var configurations:Array<Configuration> = [] {
+        didSet {
+            if let delegate = self.delegate { delegate.engineDidUpdate(self.configurations) }
+        }
+    }
+    
     func loadConfigurations(urlString: String) {
         let url = NSURL(string: urlString)!
         let fetcher = Fetcher()
         fetcher.requestJSON(url) { (json, message) in
-            if let json = json, array = json as? Array<Dictionary<String, AnyObject>> {
-                self.configDataArray = array.map({(dict) -> configData in
-                    return configData.fromJSON(dict)
+            if let json = json, array = json as? Array<Dictionary<String,AnyObject>> {
+                
+                self.configurations = array.map({ (dict) -> Configuration in
+                    return Configuration.fromJSON(dict)
                 })
-                print(self.configDataArray)
-    
+                print(self.configurations)
                 let op = NSBlockOperation {
-                    if let delegate = self.delegate { delegate.engineDidUpdate(self.configDataArray)}
+                    if let delegate = self.delegate { delegate.engineDidUpdate(self.configurations) }
                 }
                 NSOperationQueue.mainQueue().addOperation(op)
             }
         }
     }
-
+    
+    func updateGridBasedOnConfiguration() {
+        if let configuration = configuration {
+            let newGrid = Grid(rows, cols) { position in
+                return configuration.positions.contains({ return position.row == $0.row && position.col == $0.col }) ? .Alive : .Empty
+            }
+            
+            grid = newGrid
+        }
+    }
+    
     
     var grid: GridProtocol
-
+    
     var rows: Int = 20 {
         didSet {
             grid = Grid(self.rows, self.cols) { _,_ in .Empty }
@@ -116,9 +156,35 @@ class StandardEngine: EngineProtocol {
     
     weak var delegate: EngineDelegate?
     
-    var refreshRate:  Double = 0.0
-    var refreshTimer: Timer?
-    var genCount: Int = 1
+    var refreshRate:  Double = 1.0
+    var refreshTimer: NSTimer?
+    var timerOn: Bool = true
+    
+    /// Cancel the timer
+    func cancelTimer() {
+        print("Canceling")
+        refreshTimer?.invalidate()
+        refreshTimer = nil
+    }
+
+    /// Start timer
+    func startTimer() {
+        // Invalidate any old one in case it was called more than once
+        refreshTimer?.invalidate()
+        
+        // Set up the timer
+        refreshTimer = NSTimer.scheduledTimerWithTimeInterval(refreshRate,
+                                                       target: self,
+                                                       selector: #selector(onTimerFire(_:)),
+                                                       userInfo: nil,
+                                                       repeats: true)
+
+        }
+
+    @objc func onTimerFire(timer:NSTimer) {
+        self.step()
+        print("Fired and Stepped")
+    }
     
     
     subscript (i:Int, j:Int) -> CellState {
@@ -130,23 +196,21 @@ class StandardEngine: EngineProtocol {
         }
     }
     
-
     
-    init(_ rows: Int, _ cols: Int, cellInitializer: CellInitializer = {_ in .Empty }) {
+    
+    private init(_ rows: Int, _ cols: Int, cellInitializer: CellInitializer = {_ in .Empty }) {
         self.rows = rows
         self.cols = cols
         self.grid = Grid(rows,cols, cellInitializer: cellInitializer)
-        self.genCount = 0
     }
     
     func step() -> GridProtocol {
-        self.genCount = self.genCount + 1
-        print(self.genCount)
+        genCount = genCount + 1
         var newGrid = Grid(self.rows, self.cols)
         newGrid.cells = grid.cells.map {
             switch grid.livingNeighbors($0.position) {
             case 2 where $0.state.isLiving(),
-                 3 where $0.state.isLiving():  return Cell($0.position, .Alive)
+            3 where $0.state.isLiving():  return Cell($0.position, .Alive)
             case 3 where !$0.state.isLiving(): return Cell($0.position, .Born)
             case _ where $0.state.isLiving():  return Cell($0.position, .Died)
             default:                           return Cell($0.position, .Empty)
@@ -197,7 +261,7 @@ struct Grid: GridProtocol {
         return Grid.offsets.map { Position((pos.row + rows + $0.row) % rows,
             (pos.col + cols + $0.col) % cols) }
     }
-
+    
     func livingNeighbors(position: Position) -> Int {
         return neighbors(position)
             .reduce(0) {
@@ -205,7 +269,3 @@ struct Grid: GridProtocol {
         }
     }
 }
-
-
-
-

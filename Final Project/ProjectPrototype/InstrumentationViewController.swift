@@ -13,35 +13,47 @@ import UIKit
 
 class InstrumentationViewController: UIViewController {
 
+    let engine = StandardEngine.sharedInstance
     
     @IBOutlet weak var rowBox: UITextField!
     
     @IBOutlet weak var columnBox: UITextField!
     
+    @IBOutlet weak var URLBox: UITextField!
+    
+    
+    //  Accept input URL and fetch json data from that location
+    @IBAction func fetchURL(sender: AnyObject) {
+        let URLString = URLBox.text
+        engine.loadConfigurations(URLString!)
+    }
+    
     //  Accept input from the row stepper
     //  Notify Standard Engine that the number of rows has changed
     @IBAction func rowStepper(sender: UIStepper) {
-        StandardEngine.sharedInstance.rows += Int(sender.value)
-        rowBox.text = String(StandardEngine.sharedInstance.rows)
+        engine.rows = Int(sender.value)
+        rowBox.text = String(engine.rows)
     }
  
     //  Accept input from the column stepper
     //  Notify Standard Engine that the number of cols has changed
     @IBAction func columnStepper(sender: UIStepper) {
-        StandardEngine.sharedInstance.cols += Int(sender.value)
-        columnBox.text = String(StandardEngine.sharedInstance.cols)
+        engine.cols = Int(sender.value)
+        columnBox.text = String(engine.cols)
     }
     
     //  Accept input from refresh slider
     //  Notify Standard Engine that the refresh rate has changed
     @IBAction func refreshSlider(sender: UISlider) {
-        StandardEngine.sharedInstance.refreshRate = Double(sender.value)
+        engine.refreshRate = Double(sender.value)
+        print(engine.refreshRate)
     }
     
     // Accept input from refresh switch
     //  Notify Standard Engine that the timer is switched off
     @IBAction func refreshSwitch(sender: UISwitch) {
-        StandardEngine.sharedInstance.refreshTimer?.cancelTimer()
+        engine.timerOn == true ? (engine.timerOn = false) : (engine.timerOn = true)
+        print(engine.timerOn)
     }
     
     override func viewDidLoad() {

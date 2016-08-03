@@ -11,11 +11,9 @@ import UIKit
 class ConfigurationEditorViewController: UIViewController, EngineDelegate {
     
     
-    var name:String?
-    var commit: (String -> Void)?
-    
     let engine = StandardEngine.sharedInstance
-    
+    var configuration:Configuration?
+    var commit: (String -> Void)?
     
     @IBOutlet weak var editGridView: GridView!
     
@@ -30,16 +28,16 @@ class ConfigurationEditorViewController: UIViewController, EngineDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         // Do any additional setup after loading the view.
-        nameTextField.text = name
-        editGridView.setNeedsDisplay()
+//        nameTextField.text = configuration?.title
     }
     
-    override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(animated)
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
         engine.delegate = self
-        editGridView.points = engine.configuration!.positions
-        editGridView.setNeedsDisplay()
+//        editGridView.points = configuration!.positions
+//        editGridView.setNeedsDisplay()
     }
 
 
@@ -49,8 +47,11 @@ class ConfigurationEditorViewController: UIViewController, EngineDelegate {
     }
     
     
-    // Draw entire grid
     func engineDidUpdate(withGrid: GridProtocol) {
+        // do nothing
+    }
+    
+    func engineDidUpdate(withConfigurations: Array<Configuration>) {
         editGridView.setNeedsDisplay()
     }
 

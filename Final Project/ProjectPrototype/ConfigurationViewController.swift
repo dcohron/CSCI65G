@@ -10,33 +10,36 @@ import UIKit
 
 
 //  JSON is made up of Array, Dictionary, Boolean, Integer, Double/Float, String
-struct configData {
+struct Configuration {
     var title: String
-    let positions: Array<Position>
+    var positions: Array<Position>
     
-    static func fromJSON (json: Dictionary<String, AnyObject>) -> configData {
+    static func fromJSON(json: Dictionary<String, AnyObject>) -> Configuration {
         let title = json["title"] as! String
+        
         let contents = json["contents"] as! Array<Array<Int>>
-        let positions = contents.map({ (intArray) -> Position in
-            return Position(intArray.first!,intArray.last!)
-        })
-        return configData(title: title, positions: positions)
+        
+        let positions = contents.map { (intArray) -> Position in
+            return Position(intArray.first!, intArray.last!)
+        }
+        
+        return Configuration(title: title, positions: positions)
     }
 }
 
 
 class ConfigurationViewController: UITableViewController, EngineDelegate {
     
-//    private var configDataArray:Array<configData> = []
     
     let engine = StandardEngine.sharedInstance
     
-    private var configurations:Array<configData> {
+    private var configurations:Array<Configuration> {
         get {
-            return engine.configDataArray
+            return engine.configurations
         }
+        
         set {
-            engine.configDataArray = newValue
+            engine.configurations = newValue
         }
     }
 
@@ -49,6 +52,7 @@ class ConfigurationViewController: UITableViewController, EngineDelegate {
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
+        engine.configurationIndex = nil
         engine.delegate = self
     }
 
@@ -56,7 +60,7 @@ class ConfigurationViewController: UITableViewController, EngineDelegate {
         // do nothing
     }
     
-    func engineDidUpdate(withConfigurations: Array<configData>) {
+    func engineDidUpdate(withConfigurations: Array<Configuration>) {
         tableView.reloadData()
     }
 
@@ -66,9 +70,8 @@ class ConfigurationViewController: UITableViewController, EngineDelegate {
     }
     
     
-    @IBAction func addName(sender: AnyObject) {
-        let newItem = configData (title: "newConfig", positions: [])
-        configurations.append(newItem)
+    @IBAction func addConfiguration(sender: AnyObject) {
+        configurations.append(Configuration(title: "Add new name...", positions: []))
         let itemRow = configurations.count - 1
         let itemPath = NSIndexPath(forRow:itemRow, inSection: 0)
         tableView.insertRowsAtIndexPaths([itemPath], withRowAnimation: .Automatic)
@@ -79,10 +82,7 @@ class ConfigurationViewController: UITableViewController, EngineDelegate {
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCellWithIdentifier("Default")
-            else {
-                preconditionFailure("missing Default reuse identifier")
-        }
+        guard let cell = tableView.dequeueReusableCellWithIdentifier("Default") else { preconditionFailure("missing Default reuse identifier") }
         let row = indexPath.row
         guard let nameLabel = cell.textLabel else {
             preconditionFailure("wtf?")
@@ -104,11 +104,10 @@ class ConfigurationViewController: UITableViewController, EngineDelegate {
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         let editingRow = (sender as! UITableViewCell).tag
-        let editingString = configurations[editingRow].title
-        guard let editingVC = segue.destinationViewController as? ConfigurationEditorViewController
-            else {
-                preconditionFailure("Another wtf?")
-        }
+        guard let editingVC = segue.destinationViewController as? ConfigurationEditorViewController else { preconditionFailure("Another wtf?") }
+        
+//        engine.configurationIndex = editingRow
+        print(configurations[editingRow].title)
         editingVC.configuration = configurations[editingRow]
         editingVC.commit = {
             self.configurations[editingRow].title = $0
