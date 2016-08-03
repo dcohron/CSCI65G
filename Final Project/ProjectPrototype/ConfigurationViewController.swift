@@ -71,7 +71,7 @@ class ConfigurationViewController: UITableViewController, EngineDelegate {
     
     
     @IBAction func addConfiguration(sender: AnyObject) {
-        configurations.append(Configuration(title: "Add new name", positions: []))
+        configurations.append(Configuration(title: "New configuration", positions: []))
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
